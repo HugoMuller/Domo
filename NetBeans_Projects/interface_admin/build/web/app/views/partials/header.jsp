@@ -3,8 +3,8 @@
     Created on : 22 avr. 2013, 12:32:15
     Author     : Hugo
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="mode.ModeType" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
