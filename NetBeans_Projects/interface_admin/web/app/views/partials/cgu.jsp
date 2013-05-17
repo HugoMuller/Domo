@@ -26,7 +26,6 @@
             <jsp:include page="header.jsp"/>
         </header>
         
-    <body>
         <div>
             <div id='toc' class='nav-left'>
                 <nav>

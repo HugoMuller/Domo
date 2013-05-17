@@ -19,8 +19,8 @@
                     <li class="divider-vertical"></li>
                     <li><a href="#"><i class="icon-eye-close"></i> Engagement sur la confidentialité</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="#"><i class="icon-comment"></i> Feedback</a></li>
-                    <li><a href="#"><i class="icon-info-sign"></i> A propos...</a></li>
+                    <li><a href="app/views/partials/feedback.jsp"><i class="icon-comment"></i> Feedback</a></li>
+                    <li><a href="app/views/partials/about.jsp"><i class="icon-info-sign"></i> A propos...</a></li>
                 </ul>
             </div>
             <div class="copyright">Copyright © 2013 EcologU - All Rights Reserved. Designed with <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> and <a href="http://glyphicons.com">Glyphicons Free</a></div>
