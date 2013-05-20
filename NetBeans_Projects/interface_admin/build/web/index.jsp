@@ -18,6 +18,12 @@
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
         <!--<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css"/>-->
         <link rel="shortcut icon" href="static/images/logo.png"/>
+        
+        
+        <%--  Pour dessiner les graphes  --%>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="static/javascript/loadLineChart.js"></script>
+        
         <title>Interface Administrateur</title>
     </head>
 
@@ -28,7 +34,7 @@
 
         <section>
             <article>
-                
+                <div id="chart_div" style="width: 900px; height: 500px;"></div>
             </article>
             <aside>
                 <!-- Placez ici des informations complémentaires -->
