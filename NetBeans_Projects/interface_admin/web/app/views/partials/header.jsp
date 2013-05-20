@@ -25,9 +25,29 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-play-circle"></i>  Mode <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Standard</a></li>
-                            <li><a href="#">Congés</a></li>
-                            <li><a href="#">Alerting</a></li>
+                            <form method="POST" action="#">
+                                <li>
+                                    <a href="#">
+                                        <input type="hidden" name="action" value="standard"/>
+                                        <input type="submit" value="fer">
+                                        Standard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <input type="hidden" name="action" value="holiday"/>
+                                        <input type="submit" style="visibility:hidden;display:none;">
+                                        Congés
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <input type="hidden" name="action" value="alerting"/>
+                                        <input type="submit" style="visibility:hidden;display:none;">
+                                        Alerting
+                                    </a>
+                                </li>
+                            </form>
                             <li class="divider"></li>
                             <!--<li class="nav-header">Nav header</li>-->
                             <li><a href="#"><i class="icon-wrench"></i> Configurations</a></li>
