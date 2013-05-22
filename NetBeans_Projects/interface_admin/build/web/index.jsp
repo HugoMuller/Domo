@@ -35,6 +35,8 @@
         <section>
             <article>
                 <div id="chart_div" style="width: 900px; height: 500px;"></div>
+                
+                <p> Hello World !!!  </p>
             </article>
             <aside>
                 <!-- Placez ici des informations complémentaires -->
