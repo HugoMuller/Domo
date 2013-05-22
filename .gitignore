@@ -1,0 +1,4 @@
+
+*.DS_Store
+NetBeans_Projects/interface_admin/nbproject/*
+*.class
