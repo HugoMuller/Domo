@@ -2,22 +2,23 @@ package servletContextListener;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
-//import java.util.Properties;
+import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 //import org.apache.derby.tools.ij;
 
 /**
  *
  * @author Hugo
  */
-
+@WebListener
 public class AppServletContextListener implements ServletContextListener
 {
     private String framework = "derbyclient"; //"embedded";
@@ -48,26 +49,33 @@ public class AppServletContextListener implements ServletContextListener
         try
         {
             //uncomment to add a user and an authenticated connection
-            //Properties props = new properties();
-            //props.put("user", "root");
-            //props.put("password", "root");
-            con = DriverManager.getConnection(protocol + DBname + ";create=true;");
+            Properties props = new Properties();
+            props.put("user", "root");
+            props.put("password", "root");
+            con = DriverManager.getConnection(protocol + DBname + ";create=true;", props);
             con.setAutoCommit(false);
             s = con.createStatement();
             statements.add(s);
             s.execute("CREATE TABLE heating("
-                        + "date date not null primary key,"
+                        + "heure date not null primary key,"
                         + "consommation double"
                         + ");");
             System.out.println("Création de la table 'heating'");
 
             s.execute("CREATE TABLE light("
-                        + "date date not null primary key,"
+                        + "heure date not null primary key,"
                         + "consommation double"
                         + ");");
             System.out.println("Création de la table 'light'");
+            
+            s.execute("CREATE TABLE kikoulol("
+                        + "kikou int primary key,"
+                        + "trololol double"
+                        + ");");
+            System.out.println("Création de la table 'kikoulol'");
+            
             con.commit();
-            System.out.println("Transactions");
+            System.out.println("Transactions faites");
         }
         catch(SQLException sqle)
         {
@@ -156,7 +164,7 @@ public class AppServletContextListener implements ServletContextListener
             System.err.println("  Error Code: " + e.getErrorCode());
             System.err.println("  Message:    " + e.getMessage());
             // for stack traces, refer to derby.log or uncomment this:
-            //e.printStackTrace(System.err);
+            e.printStackTrace(System.err);
             e = e.getNextException();
         }
     }
