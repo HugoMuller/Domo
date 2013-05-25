@@ -2,17 +2,14 @@ package servletContextListener;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-//import org.apache.derby.tools.ij;
 
 /**
  *
@@ -25,6 +22,15 @@ public class AppServletContextListener implements ServletContextListener
     private String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
     private String protocol = "jdbc:derby://localhost:1527/"; //"jdbc:derby:";
     private String DBname = "EcologU_DB";
+    private ArrayList<String> tables = new ArrayList<String>()
+            {
+                {
+                    add("chauffage");
+                    add("eclairage");
+                    add("eau");
+                    add("ventillation");
+                }
+            };
     
     @Override
     public void contextInitialized(ServletContextEvent arg0)
@@ -43,83 +49,77 @@ public class AppServletContextListener implements ServletContextListener
     {
         this.loadDriver();
         Connection con = null;
-        ArrayList<Statement> statements = new ArrayList<>();
         Statement s = null;
-
+        
         try
         {
             //uncomment to add a user and an authenticated connection
             Properties props = new Properties();
             props.put("user", "root");
             props.put("password", "root");
+            System.out.println("Création de la base '" + DBname + "'");
             con = DriverManager.getConnection(protocol + DBname + ";create=true;", props);
-            con.setAutoCommit(false);
             s = con.createStatement();
-            statements.add(s);
-            s.execute("CREATE TABLE heating("
-                        + "heure date not null primary key,"
-                        + "consommation double"
-                        + ");");
-            System.out.println("Création de la table 'heating'");
-
-            s.execute("CREATE TABLE light("
-                        + "heure date not null primary key,"
-                        + "consommation double"
-                        + ");");
-            System.out.println("Création de la table 'light'");
-            
-            s.execute("CREATE TABLE kikoulol("
-                        + "kikou int primary key,"
-                        + "trololol double"
-                        + ");");
-            System.out.println("Création de la table 'kikoulol'");
-            
-            con.commit();
-            System.out.println("Transactions faites");
+            s.execute("SET SCHEMA APP");
         }
         catch(SQLException sqle)
         {
             printSQLException(sqle);
-            if("01J01".equals(sqle.getSQLState()))
-            {
-                System.out.println(sqle.getMessage());
-            }
-            else
-            {
-                System.out.println("Création de la DB " + DBname);
-                System.out.println("Connection à la DB " + DBname);
-            }
         }
         finally
         {
-            while(!statements.isEmpty())
+            for(int i=0; i<tables.size(); i++)
             {
-                Statement st = (Statement) statements.remove(0);
                 try
                 {
-                    if(st != null)
+                    s.execute("CREATE TABLE APP." + (String)this.tables.get(i)
+                            + "(heure date not null primary key,"
+                            + "consommation double)");
+                }
+                catch(SQLException sqle)
+                {
+                    if(!(sqle.getErrorCode() == -1 && "X0Y32".equals(sqle.getSQLState())))
                     {
-                        st.close();
-                        st = null;
+                        printSQLException(sqle);
+                    }
+                }
+                System.out.println("Création de la table '" +  this.tables.get(i) + "'");
+            }
+            
+            try
+            {
+                System.out.println("Affichage des tables");
+                ResultSet st = s.executeQuery("SELECT tablename "
+                        + "FROM sys.systables "
+                        + "WHERE tablename NOT LIKE 'SYS%'");
+                while(st.next())
+                {
+                    System.out.println(st.getString("TABLENAME"));
+                }
+                if(s != null)
+                {
+                    s.close();
+                    s = null;
+                }
+            }
+            catch(SQLException sqle)
+            {
+                printSQLException(sqle);
+            }
+            finally
+            {
+                try
+                {
+                    if(con != null)
+                    {
+                        con.close();
+                        con = null;
                     }
                 }
                 catch(SQLException sqle)
                 {
                     printSQLException(sqle);
                 }
-            }
-            
-            try
-            {
-                if (con != null)
-                {
-                    con.close();
-                    con = null;
-                }
-            }
-            catch(SQLException sqle)
-            {
-                printSQLException(sqle);
             }
         }
     }
@@ -129,43 +129,43 @@ public class AppServletContextListener implements ServletContextListener
         try
         {
             Class.forName(driver).newInstance();
-            System.out.println("Loaded the appropriate driver");
+            System.out.println(driver + " chargé");
         }
         catch(ClassNotFoundException cnfe)
         {
-            System.err.println("\nUnable to load the JDBC driver " + driver);
-            System.err.println("Please check your CLASSPATH.");
+            System.err.println("\nImpossible de charger le JDBC driver " + driver);
+            System.err.println("Vérifiez votre CLASSPATH.");
             cnfe.printStackTrace(System.err);
         }
         catch(InstantiationException ie)
         {
-            System.err.println("\nUnable to instantiate the JDBC driver " + driver);
+            System.err.println("\nImpossible d'instantier le JDBC driver " + driver);
             ie.printStackTrace(System.err);
         }
         catch(IllegalAccessException iae)
         {
-            System.err.println("\nNot allowed to access the JDBC driver " + driver);
+            System.err.println("\nAccès non autorisé au JDBC driver " + driver);
             iae.printStackTrace(System.err);
         }
     }
     
     private void reportFailure(String message)
     {
-        System.err.println("\nData verification failed:");
+        System.err.println("\nEchec de la vérification des données:");
         System.err.println('\t' + message);
     }
     
-    public static void printSQLException(SQLException e)
+    public static void printSQLException(SQLException sqle)
     {
-        while(e != null)
+        while(sqle != null)
         {
             System.err.println("\n----- SQLException -----");
-            System.err.println("  SQL State:  " + e.getSQLState());
-            System.err.println("  Error Code: " + e.getErrorCode());
-            System.err.println("  Message:    " + e.getMessage());
+            System.err.println("  SQL State:  " + sqle.getSQLState());
+            System.err.println("  Error Code: " + sqle.getErrorCode());
+            System.err.println("  Message:    " + sqle.getMessage());
             // for stack traces, refer to derby.log or uncomment this:
-            e.printStackTrace(System.err);
-            e = e.getNextException();
+            //sqle.printStackTrace(System.err);
+            sqle = sqle.getNextException();
         }
     }
 }
