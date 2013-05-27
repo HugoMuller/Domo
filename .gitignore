@@ -1,4 +1,14 @@
+# Mac OS specific #
 *.DS_Store
+
+# Netbeans specific #
 NetBeans_Projects/interface_admin/nbproject/
 NetBeans_Projects/interface_admin/build/
+NetBeans_Projects/interface_admin/dist/
+
+# Class files #
 *.class
+
+# Package files #
+*.jar
+*.war
