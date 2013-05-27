@@ -12,6 +12,7 @@ import java.io.IOException;
  *
  * @author Hugo
  */
+@WebServlet(urlPatterns = "/test")
 public class ConnectServlet extends HttpServlet
 {
     @Override

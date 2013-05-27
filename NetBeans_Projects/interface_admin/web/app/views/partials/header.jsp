@@ -3,8 +3,10 @@
     Created on : 22 avr. 2013, 12:32:15
     Author     : Hugo
 --%>
+<%@ page import="entities.ModeEntity" %>
 <%@ page import="mode.ModeType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -25,29 +27,30 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-play-circle"></i>  Mode <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <form method="POST" action="#">
-                                <li>
-                                    <a href="#">
-                                        <input type="hidden" name="action" value="standard"/>
-                                        <input type="submit" value="fer">
-                                        Standard
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <input type="hidden" name="action" value="holiday"/>
-                                        <input type="submit" style="visibility:hidden;display:none;">
-                                        Congés
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <input type="hidden" name="action" value="alerting"/>
-                                        <input type="submit" style="visibility:hidden;display:none;">
-                                        Alerting
-                                    </a>
-                                </li>
-                            </form>
+                            <li>
+                                <a href="mode?mode=STANDARD">
+                                    <% if(ModeEntity.getMode() == ModeType.STANDARD){%>
+                                    <i class="icon-check"></i>
+                                    <% } %>
+                                    Standard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mode?mode=HOLIDAY">
+                                    <% if(ModeEntity.getMode() == ModeType.HOLIDAY){%>
+                                    <i class="icon-check"></i>
+                                    <% } %>
+                                    Congés
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mode?mode=ALERTING">
+                                    <% if(ModeEntity.getMode() == ModeType.ALERTING){%>
+                                    <i class="icon-check"></i>
+                                    <% } %>
+                                    Alerting
+                                </a>
+                            </li>
                             <li class="divider"></li>
                             <!--<li class="nav-header">Nav header</li>-->
                             <li><a href="#"><i class="icon-wrench"></i> Configurations</a></li>
