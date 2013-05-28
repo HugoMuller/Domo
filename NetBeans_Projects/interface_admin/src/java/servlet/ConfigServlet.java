@@ -15,19 +15,19 @@ import java.util.logging.Logger;
  *
  * @author Hugo
  */
-@WebServlet(name="ModeServlet", urlPatterns = "/mode", asyncSupported = true)
-public class ModeServlet extends HttpServlet
+@WebServlet(name="ConfigServlet", urlPatterns = "/config", asyncSupported = true)
+public class ConfigServlet extends HttpServlet
 {
     private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String info = "mode " + request.getParameter("mode") + " sélectionné.";
-        LOG.log(Level.INFO, info);
-        ModeType mode = ModeType.valueOf(request.getParameter("mode"));
+        LOG.log(Level.SEVERE, request.getRequestURI());
+        /*ModeType mode = ModeType.valueOf(request.getParameter("mode"));
         ModeEntity.setMode(mode);
-        response.sendRedirect("");
+        response.sendRedirect("");*/
+        request.getServletContext().getRequestDispatcher("/app/views/partials/config.jsp").forward(request, response);
     }
 
     @Override

@@ -53,7 +53,7 @@
                             </li>
                             <li class="divider"></li>
                             <!--<li class="nav-header">Nav header</li>-->
-                            <li><a href="#"><i class="icon-wrench"></i> Configurations</a></li>
+                            <li><a href="config"><i class="icon-wrench"></i> Configurations</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
