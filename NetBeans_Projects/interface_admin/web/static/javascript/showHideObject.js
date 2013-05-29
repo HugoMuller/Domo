@@ -12,9 +12,9 @@ function disableObject(box, target, hide)
 {
     var objBox = document.getElementById(box);
     var objTarget = document.getElementById(target);
-    /*if(hide===1)
+    if(hide===1)
         objTarget.style.visibility = (objBox.checked==true) ? 'visible' : 'hidden';
-    else*/
+    else
         objTarget.disabled = (objBox.checked==true) ? false : true;
-    //return true;
+    return true;
 }

@@ -30,7 +30,7 @@
         
         <section>
             <article id="config-standard">
-                <form class="form-horizontal well" action="control_feedback.php" method="POST" onSubmit="">
+                <form class="form-horizontal well" action="config" method="POST">
                     <fieldset>
                         <legend>Mode Standard:</legend>
                         <h4>Précisez les heures de début et de fin de journée:</h4>
@@ -53,7 +53,6 @@
                                 <% } %>
                             </select>
                         </label>
-                        <br/>
                         
                         <label for="std-heure-fin">Fin de journée: 
                         <select name="std-heure-fin" id="std-heure-fin" style="width:64px">
@@ -78,31 +77,20 @@
                             <input type="checkbox" name="std-notif" value="SMS" id="std-notif-sms"
                                    onClick="disableObject('std-notif-sms', 'sms-field', 0);"/>SMS
                         </label>
-                        <div id="sms-field">au numéro: 
-                            <input type="tel" placeHolder="Votre numéro" size="15" maxlength="15"/>
+                        <div>au numéro: 
+                            <input type="tel" id="sms-field" placeHolder="Votre numéro" size="15" maxlength="15"/>
                         </div>
                         <label class="checkbox" for="std-notif-mail">
                             <input type="checkbox" name="std-notif" value="e-mail" id="std-notif-mail"
                                    onClick="disableObject('std-notif-mail', 'email-field', 0);"/>e-mail
                         </label>
-                        <div id="email-field">à l'adresse: 
-                            <input type="email" placeHolder="Votre e-mail" size="100" maxlength="100"/>
+                        <div>à l'adresse: 
+                            <input type="email" id="email-field" placeHolder="Votre e-mail" size="100" maxlength="100"/>
                         </div>
-                        <!--<label class="checkbox" for="std-notif-both">
-                            <input type="checkbox" name="std-notif" value="SMS & e-mail" id="std-notif-both" />SMS & e-mail
-                        </label>-->
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <div class="controls">
-                            <textarea id="textarea" rows="3"></textarea>
-                            <p class="help-block">Vous pouvez agrandir la fenêtre</p>
-                        </div>
-                        <button type="submit">Valider</button>
+
+                        <!--<button type="submit">Valider</button>-->
+                        <input type="hidden" name="action" value="validate-std"/>
+                        <input type="submit" value="Valider"/>
                     </fieldset>
                 </form>
             </article>
