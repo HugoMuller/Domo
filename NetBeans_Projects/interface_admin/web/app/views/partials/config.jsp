@@ -4,11 +4,13 @@
     Author     : Hugo
 --%>
 
-<%@page import="java.util.logging.Level"%>
-<%@page import="java.util.logging.Level"%>
-<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Map"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.logging.Level"%>
+<%@ page import="java.util.logging.Level"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.HashMap"%> 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +27,7 @@
         
         <title>Configurations</title>
     </head>
-    <body>
+    <body onLoad="disableObject('std-notif-mail', 'email-field', 0);disableObject('std-notif-sms', 'sms-field', 0);">
         <header>
             <jsp:include page="header.jsp"/>
         </header>
@@ -42,47 +44,35 @@
                         <label for="std-heure-debut">Début de journée: 
                             <select name="std-heure-debut" id="std-heure-debut" style="width:64px">
                                 <% String strStd;
-                                    HashMap<String, String> configStd = (HashMap<String, String>) request.getAttribute("config-standard");
-                                    //String hour = configStd.get("heureDebut").toString();
-                                   //String strHourStd[] = hour.split("h");
-                                   //hour = strHourStd[0]+", "+strHourStd[1];
-                                   /* Iterator iterator = configStd.keySet().iterator();  
-        while (iterator.hasNext()) {  
-           String key = iterator.next().toString();  
-           String value = configStd.get(key).toString();  
-            String msg = key+", "+value;*/
-                                    request.toString();
-                                    %>
-
-                                    <%
-                                    for(int i = 0; i<=12; i++){
+                                   HashMap<String, String> configStd = (HashMap<String, String>) request.getAttribute("config-standard");
+                                   String hour[] = (configStd.get("heureDebut").toString()).split("h");
+                                   for(int i = 0; i<=12; i++){
                                         strStd = i<10? "0"+i : ""+i;
                                 %>
-                                
-                                <option value="<%= strStd %>" <% if(String.valueOf(i).equals("9")){%>selected<% } %>><%= strStd %>h</option>
+                                    <option value="<%= strStd %>" <% if(strStd.equals(hour[0])){%>selected<% } %>><%= strStd %></option>
                                 <% } %>
-                            </select>
+                            </select> h
                             <select name="std-minute-debut" id="std-minute-debut" style="width:64px">
                                 <% for(int i = 0; i<60; i+=5){
                                         strStd = i<10? "0"+i : ""+i;
                                 %>
-                                <option value="<%= strStd %>" <% if(strStd.equals("45")){%>selected<% } %>><%= strStd %></option>
+                                <option value="<%= strStd %>" <% if(strStd.equals(hour[1])){%>selected<% } %>><%= strStd %></option>
                                 <% } %>
                             </select>
                         </label>
                         
                         <label for="std-heure-fin">Fin de journée: 
                         <select name="std-heure-fin" id="std-heure-fin" style="width:64px">
-                            <% String strHourEndStd[] = "15h45".split("h");  //(((HashMap<String, String>) request.getAttribute("config-standard")).get("heureFin")).split("h");
+                            <% hour = (configStd.get("heureFin").toString()).split("h");
                                 for(int i = 13; i<=24; i++){ %>
-                            <option value="<%= i %>" <% if(strHourEndStd[0].equals(String.valueOf(i))){%>selected<% } %>><%= i %>h</option>
+                            <option value="<%= i %>" <% if(hour[0].equals(String.valueOf(i))){%>selected<% } %>><%= i %></option>
                             <% } %>
-                        </select>
+                        </select> h
                         <select name="std-minute-fin" id="std-minute-fin" style="width:64px">
                             <% for(int i = 0; i<60; i+=5){
                                 strStd = i<10? "0"+i : ""+i;
                             %>
-                            <option value="<%= strStd %>" <% if(strHourEndStd[1].equals(String.valueOf(i))){%>selected<% } %>><%= strStd %></option>
+                            <option value="<%= strStd %>" <% if(hour[1].equals(strStd)){%>selected<% } %>><%= strStd %></option>
                             <% } %>
                         </select>
                         </label>
@@ -91,19 +81,24 @@
                         <h4>Options de notifications:</h4>
                         <br/>
                         Les notifications seront envoyées par:
+                        <% String notif = configStd.get("notification").toString();%>
                         <label class="checkbox" for="std-notif-sms">
                             <input type="checkbox" name="std-notif" value="SMS" id="std-notif-sms"
-                                   onClick="disableObject('std-notif-sms', 'sms-field', 0);"/>SMS
+                                   onClick="disableObject('std-notif-sms', 'sms-field', 0);"
+                                   <% if(notif.equals("sms") || notif.equals("both")){ %>checked<% } %>/>SMS
                         </label>
                         <div>au numéro: 
-                            <input type="tel" id="sms-field" placeHolder="Votre numéro" size="15" maxlength="15"/>
+                            <input type="tel" id="sms-field" placeHolder="Votre numéro" size="15" maxlength="15"
+                                   value="<%= configStd.get("sms").toString() %>"/>
                         </div>
                         <label class="checkbox" for="std-notif-mail">
                             <input type="checkbox" name="std-notif" value="e-mail" id="std-notif-mail"
-                                   onClick="disableObject('std-notif-mail', 'email-field', 0);"/>e-mail
+                                   onClick="disableObject('std-notif-mail', 'email-field', 0);"
+                                   <% if(notif.equals("email") || notif.equals("both")){ %>checked<% } %>/>e-mail
                         </label>
                         <div>à l'adresse: 
-                            <input type="email" id="email-field" placeHolder="Votre e-mail" size="100" maxlength="100"/>
+                            <input type="email" id="email-field" placeHolder="Votre e-mail" size="100" maxlength="100"
+                                   value="<%= configStd.get("email").toString() %>"/>
                         </div>
 
                         <!--<button type="submit">Valider</button>-->

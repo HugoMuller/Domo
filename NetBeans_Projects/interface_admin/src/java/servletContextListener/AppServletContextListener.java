@@ -92,8 +92,8 @@ public class AppServletContextListener implements ServletContextListener
             try
             {
                 s.execute("CREATE TABLE APP.configurations"
-                        + "(mode char(10) not null,"
-                        + "attribut char(20) not null,"
+                        + "(mode varchar(8) not null,"
+                        + "attribut varchar(15) not null,"
                         + "valeur varchar(60),"
                         + "primary key(mode, attribut))");
                 con.commit();
@@ -101,18 +101,18 @@ public class AppServletContextListener implements ServletContextListener
             catch(SQLException sqle)
             {
                 if(!(sqle.getErrorCode() == -1 && "X0Y32".equals(sqle.getSQLState())))
-                    {
-                        printSQLException(sqle);
-                    }
+                {
+                    printSQLException(sqle);
+                }
                 System.out.println("Création de la table 'configurations'");
             }
             
             //penser à ajouter ce try dans le code d'alex
             try
             {
-                fillConfig(con, "STANDARD", "heureDebut", "8h00");
+                fillConfig(con, "STANDARD", "heureDebut", "08h00");
                 fillConfig(con, "STANDARD", "heureFin", "18h00");
-                fillConfig(con, "STANDARD", "notification", "both");
+                fillConfig(con, "STANDARD", "notification", "email");
                 fillConfig(con, "STANDARD", "sms", "");
                 fillConfig(con, "STANDARD", "email", "le-gars@la-boite.fr");
                 
@@ -214,7 +214,7 @@ public class AppServletContextListener implements ServletContextListener
         ps.setString(2, attr);
         ps.setString(3, value);
         ps.execute();
-        con.commit();
+        //con.commit();
     }
     
     public static void updateConfig(Connection con, String mode, String attr, String value) throws SQLException
