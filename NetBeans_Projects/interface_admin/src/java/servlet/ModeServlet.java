@@ -10,6 +10,7 @@ import java.io.IOException;
 import mode.ModeType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//import javax.inject.Inject;
 
 /**
  *
@@ -18,6 +19,8 @@ import java.util.logging.Logger;
 @WebServlet(name="ModeServlet", urlPatterns = "/mode", asyncSupported = true)
 public class ModeServlet extends HttpServlet
 {
+    //@Inject
+    //ModeEntity modeEntity;
     private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
     
     @Override

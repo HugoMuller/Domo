@@ -4,7 +4,11 @@
     Author     : Hugo
 --%>
 
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.util.Iterator"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.HashMap"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,36 +39,50 @@
                         <legend>Mode Standard:</legend>
                         <h4>Précisez les heures de début et de fin de journée:</h4>
                         <br/>
-                        
                         <label for="std-heure-debut">Début de journée: 
                             <select name="std-heure-debut" id="std-heure-debut" style="width:64px">
-                                <% String str;
+                                <% String strStd;
+                                    HashMap<String, String> configStd = (HashMap<String, String>) request.getAttribute("config-standard");
+                                    //String hour = configStd.get("heureDebut").toString();
+                                   //String strHourStd[] = hour.split("h");
+                                   //hour = strHourStd[0]+", "+strHourStd[1];
+                                   /* Iterator iterator = configStd.keySet().iterator();  
+        while (iterator.hasNext()) {  
+           String key = iterator.next().toString();  
+           String value = configStd.get(key).toString();  
+            String msg = key+", "+value;*/
+                                    request.toString();
+                                    %>
+
+                                    <%
                                     for(int i = 0; i<=12; i++){
-                                        str=i<10?"0"+i:""+i;
+                                        strStd = i<10? "0"+i : ""+i;
                                 %>
-                                <option value="<%= str %>"><%= str %>h</option>
+                                
+                                <option value="<%= strStd %>" <% if(String.valueOf(i).equals("9")){%>selected<% } %>><%= strStd %>h</option>
                                 <% } %>
                             </select>
                             <select name="std-minute-debut" id="std-minute-debut" style="width:64px">
                                 <% for(int i = 0; i<60; i+=5){
-                                        str=i<10?"0"+i:""+i;
+                                        strStd = i<10? "0"+i : ""+i;
                                 %>
-                                <option value="<%= str %>"><%= str %></option>
+                                <option value="<%= strStd %>" <% if(strStd.equals("45")){%>selected<% } %>><%= strStd %></option>
                                 <% } %>
                             </select>
                         </label>
                         
                         <label for="std-heure-fin">Fin de journée: 
                         <select name="std-heure-fin" id="std-heure-fin" style="width:64px">
-                            <% for(int i = 13; i<=24; i++){ %>
-                            <option value="<%= i %>"><%= i %>h</option>
+                            <% String strHourEndStd[] = "15h45".split("h");  //(((HashMap<String, String>) request.getAttribute("config-standard")).get("heureFin")).split("h");
+                                for(int i = 13; i<=24; i++){ %>
+                            <option value="<%= i %>" <% if(strHourEndStd[0].equals(String.valueOf(i))){%>selected<% } %>><%= i %>h</option>
                             <% } %>
                         </select>
                         <select name="std-minute-fin" id="std-minute-fin" style="width:64px">
                             <% for(int i = 0; i<60; i+=5){
-                                str=i<10?"0"+i:""+i;
+                                strStd = i<10? "0"+i : ""+i;
                             %>
-                            <option value="<%= str %>"><%= str %></option>
+                            <option value="<%= strStd %>" <% if(strHourEndStd[1].equals(String.valueOf(i))){%>selected<% } %>><%= strStd %></option>
                             <% } %>
                         </select>
                         </label>

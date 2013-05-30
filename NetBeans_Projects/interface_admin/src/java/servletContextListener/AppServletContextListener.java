@@ -107,11 +107,10 @@ public class AppServletContextListener implements ServletContextListener
                 System.out.println("Création de la table 'configurations'");
             }
             
+            //penser à ajouter ce try dans le code d'alex
             try
             {
-                System.out.println("bla1");
                 fillConfig(con, "STANDARD", "heureDebut", "8h00");
-                System.out.println("bla2");
                 fillConfig(con, "STANDARD", "heureFin", "18h00");
                 fillConfig(con, "STANDARD", "notification", "both");
                 fillConfig(con, "STANDARD", "sms", "");
