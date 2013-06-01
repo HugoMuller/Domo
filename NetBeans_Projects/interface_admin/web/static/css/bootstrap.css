@@ -6093,3 +6093,7 @@ a.badge:hover {
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
+.collapsed-article form{
+    display: none;
+}

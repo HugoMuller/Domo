@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import mode.ModeType;
 import java.util.logging.Level;
@@ -54,17 +55,143 @@ public class ConfigServlet extends HttpServlet
         {
             if("valid-std".equals(action))
             {
-                //handleAddition(request);
+                handleStandard(request);
             }
             else if("valid-holy".equals(action))
             {
-                //handleRemoval(request);
+                handleHoliday(request);
             }
             else if("valid-alert".equals(action))
             {
-                
+                handleAlerting(request);
             }
         }
         response.sendRedirect("tasks");
+    }
+    
+    private void handleStandard(HttpServletRequest request)
+    {
+        Map<String, String> newConfigStandard = new HashMap<String, String>();
+        String[] heureDebut = request.getParameterValues("std-heure-debut");
+        String[] heureFin = request.getParameterValues("std-heure-fin");
+        String[] notifications = request.getParameterValues("std-notif");
+        String field = "";
+
+        newConfigStandard.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
+        newConfigStandard.put("heureFin", heureFin[0]+"h"+heureFin[1]);
+        
+        if(notifications.length == 2)
+        {
+            newConfigStandard.put("notification", "both");
+        }
+        else
+        {
+            newConfigStandard.put("notification", notifications[0]);
+        }
+        
+        for(String notif : notifications)
+        {
+            if(notif.equals("sms"))
+            {
+                field = request.getParameterValues("sms-field")[0];
+            }
+            else if(notif.equals("email"))
+            {
+                field = request.getParameterValues("email-field")[0];
+            }
+            if(field != null)
+            {
+                newConfigStandard.put(notif, field);
+            }
+            else
+            {
+                newConfigStandard.put(notif, "");
+            }
+        }
+        configEntity.setConfigStandard(newConfigStandard);
+    }
+    
+    private void handleHoliday(HttpServletRequest request)
+    {
+        Map<String, String> newConfigHoliday = new HashMap<String, String>();
+        String[] heureDebut = request.getParameterValues("std-heure-debut");
+        String[] heureFin = request.getParameterValues("std-heure-fin");
+        String[] notifications = request.getParameterValues("std-notif");
+        String field = "";
+
+        newConfigHoliday.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
+        newConfigHoliday.put("heureFin", heureFin[0]+"h"+heureFin[1]);
+        
+        if(notifications.length == 2)
+        {
+            newConfigHoliday.put("notification", "both");
+        }
+        else
+        {
+            newConfigHoliday.put("notification", notifications[0]);
+        }
+        
+        for(String notif : notifications)
+        {
+            if(notif.equals("sms"))
+            {
+                field = request.getParameterValues("sms-field")[0];
+            }
+            else if(notif.equals("email"))
+            {
+                field = request.getParameterValues("email-field")[0];
+            }
+            if(field != null)
+            {
+                newConfigHoliday.put(notif, field);
+            }
+            else
+            {
+                newConfigHoliday.put(notif, "");
+            }
+        }
+        configEntity.setConfigHoliday(newConfigHoliday);
+    }
+    
+    private void handleAlerting(HttpServletRequest request)
+    {
+        Map<String, String> newConfigAlerting = new HashMap<String, String>();
+        String[] heureDebut = request.getParameterValues("std-heure-debut");
+        String[] heureFin = request.getParameterValues("std-heure-fin");
+        String[] notifications = request.getParameterValues("std-notif");
+        String field = "";
+
+        newConfigAlerting.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
+        newConfigAlerting.put("heureFin", heureFin[0]+"h"+heureFin[1]);
+        
+        if(notifications.length == 2)
+        {
+            newConfigAlerting.put("notification", "both");
+        }
+        else
+        {
+            newConfigAlerting.put("notification", notifications[0]);
+        }
+        
+        for(String notif : notifications)
+        {
+            if(notif.equals("sms"))
+            {
+                field = request.getParameterValues("sms-field")[0];
+            }
+            else if(notif.equals("email"))
+            {
+                field = request.getParameterValues("email-field")[0];
+            }
+            if(field != null)
+            {
+                newConfigAlerting.put(notif, field);
+            }
+            else
+            {
+                newConfigAlerting.put(notif, "");
+            }
+        }
+        configEntity.setConfigAlerting(newConfigAlerting);
     }
 }

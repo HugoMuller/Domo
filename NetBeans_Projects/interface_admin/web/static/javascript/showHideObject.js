@@ -18,3 +18,7 @@ function disableObject(box, target, hide)
         objTarget.disabled = (objBox.checked==true) ? false : true;
     return true;
 }
+
+$('.collapsed-article > button').click(function() {
+   $(this).toggleClass('collapsed-article');
+});

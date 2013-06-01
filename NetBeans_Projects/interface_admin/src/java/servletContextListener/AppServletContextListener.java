@@ -75,8 +75,8 @@ public class AppServletContextListener implements ServletContextListener
                 try
                 {
                     s.execute("CREATE TABLE APP." + (String)this.tables.get(i)
-                            + "(heure date not null primary key,"
-                            + "consommation double)");
+                            + "(heure char(40) not null primary key,"
+                            + "consommation char(10))");
                     con.commit();
                 }
                 catch(SQLException sqle)
@@ -107,7 +107,6 @@ public class AppServletContextListener implements ServletContextListener
                 System.out.println("Création de la table 'configurations'");
             }
             
-            //penser à ajouter ce try dans le code d'alex
             try
             {
                 fillConfig(con, "STANDARD", "heureDebut", "08h00");
@@ -122,7 +121,7 @@ public class AppServletContextListener implements ServletContextListener
                 fillConfig(con, "HOLIDAY", "sms", "");
                 fillConfig(con, "HOLIDAY", "email", "un-autre-gars@la-boite.fr");
                 
-                fillConfig(con, "ALERTING", "heureDebut", "8h00");
+                fillConfig(con, "ALERTING", "heureDebut", "08h00");
                 fillConfig(con, "ALERTING", "heureFin", "18h00");
                 fillConfig(con, "ALERTING", "notification", "both");
                 fillConfig(con, "ALERTING", "sms", "0668371432");
