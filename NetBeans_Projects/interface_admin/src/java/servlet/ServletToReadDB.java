@@ -24,7 +24,7 @@ public class ServletToReadDB extends HttpServlet {
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          request.setAttribute("type", request.getParameter("type"));
-         request.getServletContext().getRequestDispatcher("/app/views/partials/notif.jsp").forward(request, response);
+         request.getServletContext().getRequestDispatcher("/app/views/notif.jsp").forward(request, response);
      }
      
     @Override
