@@ -14,7 +14,9 @@ import java.util.Properties;
  * @author YaXi/Elo
  */
 public class SingletonConnectionDB {
-    private volatile static Connection conn;
+    private Connection conn;
+    private static SingletonConnectionDB mySingleton = null;
+
     
     private SingletonConnectionDB() throws SQLException {
         String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
@@ -28,10 +30,10 @@ public class SingletonConnectionDB {
     }
     
     public static Connection getInstance() throws SQLException {
-        if (conn == null) {
-            conn = (Connection) new SingletonConnectionDB();
+         if (mySingleton == null) {
+             mySingleton =  new SingletonConnectionDB();
         }
-        return conn;
+        return mySingleton.conn;
     }
     
 }
