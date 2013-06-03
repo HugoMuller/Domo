@@ -3,11 +3,6 @@
  * @author Hugo
  */
 
-function showHideObject(box, target) 
-{
-    document.getElementById(target).style.display = box.checked ? "" : "none";
-}
-
 function disableObject(box, target, hide)
 {
     var objBox = document.getElementById(box);
@@ -19,6 +14,10 @@ function disableObject(box, target, hide)
     return true;
 }
 
-$('.collapsed-article > button').click(function() {
-   $(this).toggleClass('collapsed-article');
-});
+function toggleForm(img, event, target)
+{
+    event.preventDefault();
+    img.src = (img.src.match("/interface_admin/static/images/arrow_up.png")) ?
+        "/interface_admin/static/images/arrow_down.png" : "/interface_admin/static/images/arrow_up.png";
+    $(document.getElementById(target)).slideToggle(350);
+}

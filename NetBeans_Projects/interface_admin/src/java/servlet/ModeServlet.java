@@ -10,7 +10,6 @@ import java.io.IOException;
 import mode.ModeType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javax.inject.Inject;
 
 /**
  *
@@ -19,18 +18,17 @@ import java.util.logging.Logger;
 @WebServlet(name="ModeServlet", urlPatterns = "/mode", asyncSupported = true)
 public class ModeServlet extends HttpServlet
 {
-    //@Inject
-    //ModeEntity modeEntity;
     private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        String referer = request.getHeader("Referer");
         String info = "mode " + request.getParameter("mode") + " sélectionné.";
         LOG.log(Level.INFO, info);
         ModeType mode = ModeType.valueOf(request.getParameter("mode"));
         ModeEntity.setMode(mode);
-        response.sendRedirect("");
+        response.sendRedirect(referer);
     }
 
     @Override

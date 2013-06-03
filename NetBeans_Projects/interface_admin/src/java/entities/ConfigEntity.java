@@ -156,7 +156,6 @@ public class ConfigEntity implements Serializable
     {
         loadDriver();
         Connection con = null;
-        PreparedStatement ps = null;
         Statement s = null;
         try
         {
@@ -178,7 +177,7 @@ public class ConfigEntity implements Serializable
         }
         finally
         {
-            closeConnection(con, null, null, ps);
+            closeConnection(con, s, null, null);
         }
     }
     
