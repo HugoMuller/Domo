@@ -28,16 +28,50 @@ public class DBLinker {
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
        // PreparedStatement prepare 
-        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS" ;
+        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
         ResultSet res = state.executeQuery(query); 
-        
+
         while (!res.isLast()) {
             res.next();
-            currentNotif+= "Le " + res.getString(2) + " : " + res.getString(3)
+            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
                 + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
-            tempList.add(currentNotif);  
-        }
+            tempList.add(currentNotif); 
+       }
+        return tempList; 
+    }
+    
+    public List<String> getEclairageNotif() throws SQLException {
+        List<String> tempList = new ArrayList<>(); 
+        String currentNotif = "";
         
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       // PreparedStatement prepare 
+        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Eclairage'" ;
+        ResultSet res = state.executeQuery(query); 
+        res.first();
+        while (!res.isLast()) {
+            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
+                + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+            tempList.add(currentNotif); 
+            res.next();
+       }
+        return tempList; 
+    }
+        
+    public List<String> getAllNotif() throws SQLException {
+        List<String> tempList = new ArrayList<>(); 
+        String currentNotif = "";
+        
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       // PreparedStatement prepare 
+        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS" ;
+        ResultSet res = state.executeQuery(query); 
+        while (!res.isLast()) {
+            res.next();
+            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
+                + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+            tempList.add(currentNotif); 
+       }
         return tempList; 
     }
     

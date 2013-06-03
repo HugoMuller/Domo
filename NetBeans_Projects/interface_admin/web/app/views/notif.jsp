@@ -34,17 +34,17 @@
         <header>
             <jsp:include page="partials/header.jsp"/>
         </header>
-        
-        We're on the notif page :
-        <% String type = (String) request.getAttribute("type"); %>
-        <%= type %>
-        <br/>
-        
-        <% DBLinker myLinker = new DBLinker();
+
+        <% String type = (String) request.getAttribute("type"); 
+            DBLinker myLinker = new DBLinker();
             List<String> listNotif = null;
             if (type.equals("Chauffage")) {
                 listNotif = myLinker.getChauffageNotif();
-            } 
+            } else if (type.equals("Eclairage")) {
+                listNotif = myLinker.getEclairageNotif();
+            } else if (type.equals("All")) {
+                listNotif = myLinker.getAllNotif();
+            }
             for (String notif : listNotif) {%> 
                 <%= notif %>
         <% } %>
