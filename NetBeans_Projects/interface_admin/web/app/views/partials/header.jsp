@@ -4,6 +4,7 @@
     Author     : Hugo
 --%>
 <%@ page import="entities.ModeEntity" %>
+<%@ page import="entities.NavBarEntity" %>
 <%@ page import="mode.ModeType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
