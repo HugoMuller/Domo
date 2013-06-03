@@ -18,5 +18,7 @@
         We're on the notif page :
         <% String type = (String) request.getAttribute("type"); %>
         <%= type %>
+        <br/>
+                
     </body>
 </html>
