@@ -50,23 +50,28 @@ public class ConfigServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        LOG.log(Level.INFO, "============================ doPost ===========================");
         String action = request.getParameter("action");
+        LOG.log(Level.INFO, action);
         if(action != null)
         {
-            if("valid-std".equals(action))
+            if("validate-std".equals(action))
             {
+                LOG.log(Level.INFO, "============== action = validate-std ======================");
                 handleStandard(request);
             }
-            else if("valid-holy".equals(action))
+            else if("validate-holiday".equals(action))
             {
+                LOG.log(Level.INFO, "============== action = validate-holiday ======================");
                 handleHoliday(request);
             }
-            else if("valid-alert".equals(action))
+            else if("validate-alerting".equals(action))
             {
+                LOG.log(Level.INFO, "============== action = validate-alerting ======================");
                 handleAlerting(request);
             }
         }
-        response.sendRedirect("tasks");
+        response.sendRedirect("config");
     }
     
     private void handleStandard(HttpServletRequest request)
@@ -77,6 +82,10 @@ public class ConfigServlet extends HttpServlet
         String[] notifications = request.getParameterValues("std-notif");
         String field = "";
 
+        for(String notif : notifications)
+        {
+        LOG.log(Level.INFO, notif);
+        }
         newConfigStandard.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
         newConfigStandard.put("heureFin", heureFin[0]+"h"+heureFin[1]);
         
@@ -93,11 +102,11 @@ public class ConfigServlet extends HttpServlet
         {
             if(notif.equals("sms"))
             {
-                field = request.getParameterValues("sms-field")[0];
+                field = request.getParameterValues("std-sms-field")[0];
             }
             else if(notif.equals("email"))
             {
-                field = request.getParameterValues("email-field")[0];
+                field = request.getParameterValues("std-email-field")[0];
             }
             if(field != null)
             {
@@ -114,9 +123,9 @@ public class ConfigServlet extends HttpServlet
     private void handleHoliday(HttpServletRequest request)
     {
         Map<String, String> newConfigHoliday = new HashMap<String, String>();
-        String[] heureDebut = request.getParameterValues("std-heure-debut");
-        String[] heureFin = request.getParameterValues("std-heure-fin");
-        String[] notifications = request.getParameterValues("std-notif");
+        String[] heureDebut = request.getParameterValues("holiday-heure-debut");
+        String[] heureFin = request.getParameterValues("holiday-heure-fin");
+        String[] notifications = request.getParameterValues("holiday-notif");
         String field = "";
 
         newConfigHoliday.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
@@ -135,11 +144,11 @@ public class ConfigServlet extends HttpServlet
         {
             if(notif.equals("sms"))
             {
-                field = request.getParameterValues("sms-field")[0];
+                field = request.getParameterValues("holiday-sms-field")[0];
             }
             else if(notif.equals("email"))
             {
-                field = request.getParameterValues("email-field")[0];
+                field = request.getParameterValues("holiday-email-field")[0];
             }
             if(field != null)
             {
@@ -156,9 +165,9 @@ public class ConfigServlet extends HttpServlet
     private void handleAlerting(HttpServletRequest request)
     {
         Map<String, String> newConfigAlerting = new HashMap<String, String>();
-        String[] heureDebut = request.getParameterValues("std-heure-debut");
-        String[] heureFin = request.getParameterValues("std-heure-fin");
-        String[] notifications = request.getParameterValues("std-notif");
+        String[] heureDebut = request.getParameterValues("alerting-heure-debut");
+        String[] heureFin = request.getParameterValues("alerting-heure-fin");
+        String[] notifications = request.getParameterValues("alerting-notif");
         String field = "";
 
         newConfigAlerting.put("heureDebut", heureDebut[0]+"h"+heureDebut[1]);
@@ -177,11 +186,11 @@ public class ConfigServlet extends HttpServlet
         {
             if(notif.equals("sms"))
             {
-                field = request.getParameterValues("sms-field")[0];
+                field = request.getParameterValues("alerting-sms-field")[0];
             }
             else if(notif.equals("email"))
             {
-                field = request.getParameterValues("email-field")[0];
+                field = request.getParameterValues("alerting-email-field")[0];
             }
             if(field != null)
             {

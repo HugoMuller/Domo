@@ -10,9 +10,8 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Logger;
 import javax.inject.Named;
-import mode.ModeType;
-import servlet.ModeServlet;
 import servletContextListener.AppServletContextListener;
 import static servletContextListener.AppServletContextListener.loadDriver;
 import static servletContextListener.AppServletContextListener.printSQLException;
@@ -35,6 +34,7 @@ public class ConfigEntity implements Serializable
      * "sms", "0123456789" ou ""
      * "email", "le-gars@la-boite.fr" ou ""
     */
+    private static final Logger LOG = Logger.getLogger(ConfigEntity.class.getName());
     
     public Map<String, String> getConfigStandard()
     {
@@ -44,7 +44,7 @@ public class ConfigEntity implements Serializable
         ResultSet rs = null;
         try
         {
-            con = this.openConnection(con, s, "STANDARD");
+            con = this.openConnection();
             s = con.createStatement();
             rs = s.executeQuery("SELECT * "
                 + "FROM APP.configurations "
@@ -73,7 +73,7 @@ public class ConfigEntity implements Serializable
         ResultSet rs = null;
         try
         {
-            con = this.openConnection(con, s, "HOLIDAY");
+            con = this.openConnection();
             s = con.createStatement();
             rs = s.executeQuery("SELECT * "
                 + "FROM APP.configurations "
@@ -102,7 +102,7 @@ public class ConfigEntity implements Serializable
         ResultSet rs = null;
         try
         {
-            con = this.openConnection(con, s, "ALERTING");
+            con = this.openConnection();
             s = con.createStatement();
             rs = s.executeQuery("SELECT * "
                 + "FROM APP.configurations "
@@ -123,26 +123,54 @@ public class ConfigEntity implements Serializable
         return this.configAlerting;
     }
     
-    public void setConfigStandard(Map<String, String> configStd)
+    public void setConfigStandard(Map<String, String> config)
+    {
+        loadDriver();
+        Connection con = null;
+        Statement s = null;
+        try
+        {
+            con = this.openConnection();
+            con.setAutoCommit(false);
+            for(Map.Entry entry : config.entrySet())
+            {
+                String query = "UPDATE APP.configurations "
+                    + "SET valeur='"+(String)entry.getValue()+"'"
+                    + " WHERE mode='STANDARD' AND attribut='"+(String)entry.getKey()+"'";
+                s = con.createStatement();
+                s.execute(query);
+                con.commit();
+            }
+        }
+        catch(SQLException sqle)
+        {
+            printSQLException(sqle);
+        }
+        finally
+        {
+            closeConnection(con, s, null, null);
+        }
+    }
+    
+    public void setConfigHoliday(Map<String, String> config)
     {
         loadDriver();
         Connection con = null;
         PreparedStatement ps = null;
+        Statement s = null;
         try
         {
-            con = this.openConnection(con, null, "STANDARD");
+            con = this.openConnection();
             con.setAutoCommit(false);
-            ps = con.prepareStatement("UPDATE APP.configurations "
-                    + "SET heureDebut=?, heureFin=?, notification=?, "
-                    + "sms=?, email=? "
-                    + "WHERE mode='STANDARD'");
-            ps.setString(1, configStd.get("heureDebut"));
-            ps.setString(2, configStd.get("heureFin"));
-            ps.setString(3, configStd.get("notification"));
-            ps.setString(4, configStd.get("sms"));
-            ps.setString(5, configStd.get("email"));
-            ps.execute();
-            con.commit();
+            for(Map.Entry entry : config.entrySet())
+            {
+                String query = "UPDATE APP.configurations "
+                    + "SET valeur='"+(String)entry.getValue()+"'"
+                    + " WHERE mode='HOLIDAY' AND attribut='"+(String)entry.getKey()+"'";
+                s = con.createStatement();
+                s.execute(query);
+                con.commit();
+            }
         }
         catch(SQLException sqle)
         {
@@ -154,26 +182,24 @@ public class ConfigEntity implements Serializable
         }
     }
     
-    public void setConfigHoliday(Map<String, String> configStd)
+    public void setConfigAlerting(Map<String, String> config)
     {
         loadDriver();
         Connection con = null;
-        PreparedStatement ps = null;
+        Statement s = null;
         try
         {
-            con = this.openConnection(con, null, "STANDARD");
+            con = this.openConnection();
             con.setAutoCommit(false);
-            ps = con.prepareStatement("UPDATE APP.configurations "
-                    + "SET heureDebut=?, heureFin=?, notification=?, "
-                    + "sms=?, email=? "
-                    + "WHERE mode='HOLIDAY'");
-            ps.setString(1, configStd.get("heureDebut"));
-            ps.setString(2, configStd.get("heureFin"));
-            ps.setString(3, configStd.get("notification"));
-            ps.setString(4, configStd.get("sms"));
-            ps.setString(5, configStd.get("email"));
-            ps.execute();
-            con.commit();
+            for(Map.Entry entry : config.entrySet())
+            {
+                String query = "UPDATE APP.configurations "
+                    + "SET valeur='"+(String)entry.getValue()+"'"
+                    + " WHERE mode='ALERTING' AND attribut='"+(String)entry.getKey()+"'";
+                s = con.createStatement();
+                s.execute(query);
+                con.commit();
+            }
         }
         catch(SQLException sqle)
         {
@@ -181,52 +207,17 @@ public class ConfigEntity implements Serializable
         }
         finally
         {
-            closeConnection(con, null, null, ps);
+            closeConnection(con, s, null, null);
         }
     }
     
-    public void setConfigAlerting(Map<String, String> configStd)
-    {
-        loadDriver();
-        Connection con = null;
-        PreparedStatement ps = null;
-        try
-        {
-            con = this.openConnection(con, null, "STANDARD");
-            con.setAutoCommit(false);
-            ps = con.prepareStatement("UPDATE APP.configurations "
-                    + "SET heureDebut=?, heureFin=?, notification=?, "
-                    + "sms=?, email=? "
-                    + "WHERE mode='ALERTING'");
-            ps.setString(1, configStd.get("heureDebut"));
-            ps.setString(2, configStd.get("heureFin"));
-            ps.setString(3, configStd.get("notification"));
-            ps.setString(4, configStd.get("sms"));
-            ps.setString(5, configStd.get("email"));
-            ps.execute();
-            con.commit();
-        }
-        catch(SQLException sqle)
-        {
-            printSQLException(sqle);
-        }
-        finally
-        {
-            closeConnection(con, null, null, ps);
-        }
-    }
-    
-    private Connection openConnection(Connection con, Statement s, String mode) throws SQLException
+    private Connection openConnection() throws SQLException
     {
         //uncomment to add a user and an authenticated connection
         Properties props = new Properties();
         props.put("user", "root");
         props.put("password", "root");
         return DriverManager.getConnection(AppServletContextListener.protocol + AppServletContextListener.DBname, props);
-        /*s = con.createStatement();
-        return s.executeQuery("SELECT * "
-                + "FROM APP.configurations "
-                + "WHERE mode='" + mode + "'");*/
     }
     
     private void closeConnection(Connection con, Statement s, ResultSet rs, PreparedStatement ps)

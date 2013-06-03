@@ -42,8 +42,7 @@
         <h3 style="margin-left:200px;">Configurations des modes de fonctionnement</h3>
         
         <section style="margin-left:200px;margin-right:200px;">
-            <article id="config-standard" class="collapsed-article">
-                <button>Expand/collapce</button>
+            <article id="config-standard">
                 <form class="form-horizontal well" action="config" method="POST">
                     <fieldset>
                         <legend>Mode Standard:</legend>
@@ -151,7 +150,7 @@
                             </select>
                         </label>
                         
-                        <label for="holiday--heure-fin">Fin de journée: 
+                        <label for="holiday-heure-fin">Fin de journée: 
                         <select name="holiday-heure-fin" id="holiday-heure-fin" style="width:64px">
                             <% hourHoliday = (configHoliday.get("heureFin").toString()).split("h");
                                 for(int i = 13; i<=24; i++){ %>
@@ -232,7 +231,7 @@
                             </select>
                         </label>
                         
-                        <label for="alerting--heure-fin">Fin de journée: 
+                        <label for="alerting-heure-fin">Fin de journée: 
                         <select name="alerting-heure-fin" id="alerting-heure-fin" style="width:64px">
                             <% hourAlerting = (configAlerting.get("heureFin").toString()).split("h");
                                 for(int i = 13; i<=24; i++){ %>
