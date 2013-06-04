@@ -2,8 +2,10 @@
     Document   : index
     Created on : 15 avr. 2013, 10:02:58
     Author     : Hugo
+    Modified on : 06 juin 2013, 11:09:46 by Yaxi/Elo
 --%>
 
+<%@page import="entities.DBLinker"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -34,6 +36,11 @@
 
         <section>
             <article>
+                <% DBLinker myLinker = new DBLinker();
+                String chaufString = myLinker.getJSonStringChauffage(); %>
+                <script>
+                    var chauff=<%=chaufString%>;
+                </script>
                 <div id="chart_div" style="width: 900px; height: 500px;"></div>
             </article>
             <aside>

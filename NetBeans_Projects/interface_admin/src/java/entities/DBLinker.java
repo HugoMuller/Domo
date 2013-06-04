@@ -85,4 +85,19 @@ public class DBLinker {
         return tempList; 
     }
     
+    public String getJSonStringChauffage() {
+       return "[ ['zeze','ezetzyt'],['0',051] , ['10',20]]";
+     }
+    
+    public String getJSonStringEau() {
+        return "eau";
+    }
+    
+    public String getJSonStringElec() {
+        return "elec";
+    }
+    
+    public String getJSonStringVentil() {
+        return "ventil";
+    }
 }
