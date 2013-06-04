@@ -34,8 +34,9 @@
         <header>
             <jsp:include page="partials/header.jsp"/>
         </header>
-
-        <% String type = (String) request.getAttribute("type"); 
+        
+        <div style="margin-left:60px; margin-top:40px ">
+            <% String type = (String) request.getAttribute("type"); 
             DBLinker myLinker = new DBLinker();
             List<String> listNotif = null;
             if (type.equals("Chauffage")) {
@@ -46,9 +47,10 @@
                 listNotif = myLinker.getAllNotif();
             }
             for (String notif : listNotif) {%> 
-                <%= notif %>
+                <%= notif %><br/>
         <% } %>
-        
+        </div>
+
         <footer>
             <jsp:include page="partials/footer.jsp"/>
         </footer>

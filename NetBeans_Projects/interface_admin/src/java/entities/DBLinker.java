@@ -29,14 +29,17 @@ public class DBLinker {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
        // PreparedStatement prepare 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
-        ResultSet res = state.executeQuery(query); 
-
-        while (!res.isLast()) {
-            res.next();
-            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
-                + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
-            tempList.add(currentNotif); 
-       }
+        try {
+            ResultSet res = state.executeQuery(query); 
+            while (!res.isLast()) {
+                res.next();
+                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
+                    + "<br/><dd> Gravite : " + res.getString(1) + "<br/><dd> Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                tempList.add(currentNotif); 
+           }
+        } catch (SQLException e) {
+            tempList.add("Aucune notification de type Chauffage n'a été trouvée");
+        }
         return tempList; 
     }
     
@@ -47,14 +50,17 @@ public class DBLinker {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
        // PreparedStatement prepare 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Eclairage'" ;
-        ResultSet res = state.executeQuery(query); 
-        res.first();
-        while (!res.isLast()) {
-            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
-                + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
-            tempList.add(currentNotif); 
-            res.next();
-       }
+        try {
+            ResultSet res = state.executeQuery(query); 
+            while (!res.isLast()) {
+                res.next();
+                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
+                    + "<br/><dd> Gravite : " + res.getString(1) + "<br/><dd> Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                tempList.add(currentNotif); 
+           }
+        } catch (SQLException e) {
+            tempList.add("Aucune notification de type Eclairage n'a été trouvée ");
+        }
         return tempList; 
     }
         
@@ -65,13 +71,17 @@ public class DBLinker {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
        // PreparedStatement prepare 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS" ;
-        ResultSet res = state.executeQuery(query); 
-        while (!res.isLast()) {
-            res.next();
-            currentNotif = "Le " + res.getString(2) + " : " + res.getString(3)
-                + "<br/><dd> Gravite : " + res.getString(1) + " Equipement concerné : " +  res.getString(4) + "<br/></dd>";
-            tempList.add(currentNotif); 
-       }
+        try {
+            ResultSet res = state.executeQuery(query);    
+            while (!res.isLast()) {
+                res.next();
+                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
+                    + "<br/><dd> Gravite : " + res.getString(1) + " <br/><dd>Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                tempList.add(currentNotif); 
+           }
+        } catch (SQLException e) {
+            tempList.add("Aucune notification n'a été trouvée"); 
+        }    
         return tempList; 
     }
     
