@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
@@ -26,7 +22,7 @@ public abstract class ModeEntity implements Serializable
     {
         return ModeEntity.defaultMode;
     }
-    
+
     public static void setMode(ModeType mode)
     {
         ModeEntity.mode = mode;

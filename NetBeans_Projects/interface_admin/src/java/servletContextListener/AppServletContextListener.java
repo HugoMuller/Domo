@@ -2,6 +2,7 @@ package servletContextListener;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,10 +19,10 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class AppServletContextListener implements ServletContextListener
 {
-    private String framework = "derbyclient"; //"embedded";
-    private String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
-    private String protocol = "jdbc:derby://localhost:1527/"; //"jdbc:derby:";
-    private String DBname = "EcologU_DB";
+    public static String framework = "derbyclient"; //"embedded";
+    public static String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
+    public static String protocol = "jdbc:derby://localhost:1527/"; //"jdbc:derby:";
+    public static String DBname = "EcologU_DB";
     private ArrayList<String> tables = new ArrayList<String>()
             {
                 {
@@ -47,7 +48,7 @@ public class AppServletContextListener implements ServletContextListener
     
     private void setUpDB()
     {
-        this.loadDriver();
+        loadDriver();
         Connection con = null;
         Statement s = null;
         
@@ -59,6 +60,7 @@ public class AppServletContextListener implements ServletContextListener
             props.put("password", "root");
             System.out.println("Création de la base '" + DBname + "'");
             con = DriverManager.getConnection(protocol + DBname + ";create=true;", props);
+            con.setAutoCommit(false);
             s = con.createStatement();
             s.execute("SET SCHEMA APP");
         }
@@ -73,8 +75,9 @@ public class AppServletContextListener implements ServletContextListener
                 try
                 {
                     s.execute("CREATE TABLE APP." + (String)this.tables.get(i)
-                            + "(heure date not null primary key,"
-                            + "consommation double)");
+                            + "(heure char(40) not null primary key,"
+                            + "consommation char(10))");
+                    con.commit();
                 }
                 catch(SQLException sqle)
                 {
@@ -88,6 +91,50 @@ public class AppServletContextListener implements ServletContextListener
             
             try
             {
+                s.execute("CREATE TABLE APP.configurations"
+                        + "(mode varchar(8) not null,"
+                        + "attribut varchar(15) not null,"
+                        + "valeur varchar(60),"
+                        + "primary key(mode, attribut))");
+                con.commit();
+            }
+            catch(SQLException sqle)
+            {
+                if(!(sqle.getErrorCode() == -1 && "X0Y32".equals(sqle.getSQLState())))
+                {
+                    printSQLException(sqle);
+                }
+                System.out.println("Création de la table 'configurations'");
+            }
+            
+            try
+            {
+                fillConfig(con, "STANDARD", "heureDebut", "08h00");
+                fillConfig(con, "STANDARD", "heureFin", "18h00");
+                fillConfig(con, "STANDARD", "notification", "email");
+                fillConfig(con, "STANDARD", "sms", "");
+                fillConfig(con, "STANDARD", "email", "le-gars@la-boite.fr");
+                
+                fillConfig(con, "HOLIDAY", "heureDebut", "10h00");
+                fillConfig(con, "HOLIDAY", "heureFin", "16h00");
+                fillConfig(con, "HOLIDAY", "notification", "email");
+                fillConfig(con, "HOLIDAY", "sms", "");
+                fillConfig(con, "HOLIDAY", "email", "un-autre-gars@la-boite.fr");
+                
+                fillConfig(con, "ALERTING", "heureDebut", "08h00");
+                fillConfig(con, "ALERTING", "heureFin", "18h00");
+                fillConfig(con, "ALERTING", "notification", "both");
+                fillConfig(con, "ALERTING", "sms", "0668371432");
+                fillConfig(con, "ALERTING", "email", "le-gars-a-eduquer-a-donf@la-boite.fr");
+                con.commit();
+            }
+            catch(SQLException sqle)
+            {
+                printSQLException(sqle);
+            }
+            
+            try
+            {
                 System.out.println("Affichage des tables");
                 ResultSet st = s.executeQuery("SELECT tablename "
                         + "FROM sys.systables "
@@ -95,6 +142,15 @@ public class AppServletContextListener implements ServletContextListener
                 while(st.next())
                 {
                     System.out.println(st.getString("TABLENAME"));
+                }
+                System.out.println("\n\n Affichage de la table 'configurations'");
+                st = s.executeQuery("SELECT * FROM APP.configurations");
+                con.commit();
+                while(st.next())
+                {
+                    System.out.println("[ "+st.getString("mode")+", "
+                            + st.getString("attribut") + ", "
+                            + st.getString("valeur") + " ]");
                 }
                 if(s != null)
                 {
@@ -124,7 +180,7 @@ public class AppServletContextListener implements ServletContextListener
         }
     }
     
-    private void loadDriver()
+    public static void loadDriver()
     {
         try
         {
@@ -147,6 +203,27 @@ public class AppServletContextListener implements ServletContextListener
             System.err.println("\nAccès non autorisé au JDBC driver " + driver);
             iae.printStackTrace(System.err);
         }
+    }
+    
+    public static void fillConfig(Connection con, String mode, String attr, String value) throws SQLException
+    {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO APP.configurations "
+                + "values(?, ?, ?)");
+        ps.setString(1, mode);
+        ps.setString(2, attr);
+        ps.setString(3, value);
+        ps.execute();
+        //con.commit();
+    }
+    
+    public static void updateConfig(Connection con, String mode, String attr, String value) throws SQLException
+    {
+        PreparedStatement ps = con.prepareStatement("UPDATE APP.configurations"
+                + "set valeur=? where mode=? and attribut=?");
+        ps.setString(1, value);
+        ps.setString(2, mode);
+        ps.setString(3, attr);
+        ps.execute();
     }
     
     private void reportFailure(String message)

@@ -4,6 +4,7 @@
     Author     : Hugo
 --%>
 <%@ page import="entities.ModeEntity" %>
+<%@ page import="entities.NavBarEntity" %>
 <%@ page import="mode.ModeType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -15,15 +16,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a href="#" class="brand">
+            <a href="/interface_admin/" class="brand">
                 <img src="/interface_admin/static/images/logo.png" alt="EcologU" width="64px" height="64px"/>
                 Interface Administrateur
             </a>
             <div class="nav-collapse">
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#"><i class="icon-home"></i> Accueil</a></li>
-                    <li><a href="#">Link1</a></li>
-                    <li><a href="#">Link2</a></li>
+                    <li><a href="/interface_admin/"><i class="icon-home"></i> Accueil</a></li>
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-play-circle"></i>  Mode <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -53,7 +52,7 @@
                             </li>
                             <li class="divider"></li>
                             <!--<li class="nav-header">Nav header</li>-->
-                            <li><a href="#"><i class="icon-wrench"></i> Configurations</a></li>
+                            <li><a href="config"><i class="icon-wrench"></i> Configurations</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

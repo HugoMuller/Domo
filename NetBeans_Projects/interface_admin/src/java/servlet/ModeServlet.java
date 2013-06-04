@@ -1,6 +1,7 @@
 package servlet;
 
 import entities.ModeEntity;
+import entities.NavBarEntity;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,32 +20,22 @@ import java.util.logging.Logger;
 public class ModeServlet extends HttpServlet
 {
     private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        LOG.log(Level.SEVERE, request.getRequestURI());
+        NavBarEntity.setCurrentURL(request.getRequestURL().toString());
+        String referer = request.getHeader("Referer");
+        String info = "mode " + request.getParameter("mode") + " sélectionné.";
+        LOG.log(Level.INFO, info);
         ModeType mode = ModeType.valueOf(request.getParameter("mode"));
         ModeEntity.setMode(mode);
-        response.sendRedirect("");
+        response.sendRedirect(referer);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String action = request.getParameter("action");
-        if(action != null)
-        {
-            switch(action)
-            {
-                case "standard":
-                    response.sendRedirect("https://www.google.fr");
-                    break;
-                case "holiday":
-                    break;
-                case "alerting":
-                    break;
-            }
-        }
-        response.sendRedirect("");
+        // NOTHING
     }
 }
