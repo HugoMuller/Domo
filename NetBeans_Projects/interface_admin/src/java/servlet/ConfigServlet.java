@@ -1,6 +1,7 @@
 package servlet;
 
 import entities.ConfigEntity;
+import entities.NavBarEntity;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,7 @@ public class ConfigServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        NavBarEntity.setCurrentURL(request.getRequestURL().toString());
         Map<String, String> configStandard = new HashMap(configEntity.getConfigStandard());
         Map<String, String> configHoliday = new HashMap(configEntity.getConfigHoliday());
         Map<String, String> configAlerting = new HashMap(configEntity.getConfigAlerting());

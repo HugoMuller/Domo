@@ -1,6 +1,7 @@
 package servlet;
 
 import entities.ModeEntity;
+import entities.NavBarEntity;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ public class ModeServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        NavBarEntity.setCurrentURL(request.getRequestURL().toString());
         String referer = request.getHeader("Referer");
         String info = "mode " + request.getParameter("mode") + " sélectionné.";
         LOG.log(Level.INFO, info);
