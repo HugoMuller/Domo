@@ -69,7 +69,6 @@ public class DBLinker {
         String currentNotif = "";
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-       // PreparedStatement prepare 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS" ;
         try {
             ResultSet res = state.executeQuery(query);    
@@ -87,32 +86,80 @@ public class DBLinker {
     
     public String getJSonStringChauffage() throws SQLException {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-       // PreparedStatement prepare 
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE" ;
+        String results = "[['Heure','température']"; 
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);    
             while (!res.isLast()) {
                 res.next();
-//                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
-//                    + "<br/><dd> Gravite : " + res.getString(1) + " <br/><dd>Equipement concerné : " +  res.getString(4) + "<br/></dd>";
-//                tempList.add(currentNotif); 
+                results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+
            }
+           results += "]";
         } catch (SQLException e) {
-//            tempList.add("Aucune notification n'a été trouvée"); 
+           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
         }   
         
-       return "[ ['zeze','ezetzyt'],['0',051] , ['10',20]]";
+       return results;
      }
     
-    public String getJSonStringEau() {
-        return "static string eau";
+    public String getJSonStringEau() throws SQLException {
+//       Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//        String results = "[['Heure','Consommation d'eau]"; 
+//        String query = "SELECT CONSOMMATION, HEURE FROM APP.EAU ORDER BY HEURE ASC" ;
+//        try {
+//            ResultSet res = state.executeQuery(query);    
+//            while (!res.isLast()) {
+//                res.next();
+//                results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+//
+//           }
+//           results += "]";
+//        } catch (SQLException e) {
+//           return "[ ['Exception levée','aucun result eau'],['8',0] , ['50',0]]";
+//        }   
+//        
+//       return results;
+        return "[ ['Not supported yet','.'],['8',0] , ['50',0]]";
     }
     
     public String getJSonStringElec() {
-        return "[ ['try1','blabla'],['8',70] , ['80',120]]";
+//       Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//        String results = "[['Heure','Consommation Electrique]"; 
+//        String query = "SELECT CONSOMMATION, HEURE FROM APP.ELECTRICITE ORDER BY HEURE ASC" ;
+//        try {
+//            ResultSet res = state.executeQuery(query);    
+//            while (!res.isLast()) {
+//                res.next();
+//                results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+//
+//           }
+//           results += "]";
+//        } catch (SQLException e) {
+//           return "[ ['Exception levée','aucun result elec'],['8',0] , ['50',0]]";
+//        }   
+//        
+//       return results;
+        return "[ ['Not supported yet','coucou'],['8',70] , ['80',120]]";
     }
     
     public String getJSonStringVentil() {
-        return "[ ['ventil','test'],['25',14] , ['800',20]]";
+//       Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//        String results = "[['Heure','Vitesse Ventilation]"; 
+//        String query = "SELECT CONSOMMATION, HEURE FROM APP.VENTILATIOND ORDER BY HEURE ASC" ;
+//        try {
+//            ResultSet res = state.executeQuery(query);    
+//            while (!res.isLast()) {
+//                res.next();
+//                results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+//
+//           }
+//           results += "]";
+//        } catch (SQLException e) {
+//           return "[ ['Exception levée','aucun result ventil'],['8',0] , ['50',0]]";
+//        }   
+//        
+//       return results;
+        return "[ ['Not supported yet','test'],['25',14] , ['800',20]]";
     }
 }

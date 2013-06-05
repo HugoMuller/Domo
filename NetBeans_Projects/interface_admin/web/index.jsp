@@ -38,29 +38,27 @@
                 <script>
                     var chauff=<%=chaufString%>;
                 </script>
-                <span id="chart_chauf_div" align ="center" style="width: 900px; height: 500px;"></span>
+                <span id="chart_chauf_div" style="width: 900px; height: 500px;"></span>
 
    
                 <% String elecString = myLinker.getJSonStringElec(); %>
                 <script>
                     var elec=<%=elecString%>;
                 </script>
-                <span id="chart_elec_div" align="center" style="width: 900px; height: 500px;"></span>
+                <span id="chart_elec_div" style="width: 900px; height: 500px;"></span>
                 
    
                 <% String ventilString = myLinker.getJSonStringVentil(); %>
                 <script>
                     var ventil=<%=ventilString%>;
                 </script>
-                <span id="chart_ventil_div" align="center" style="width: 900px; height: 500px;"></span>
-
-                <p></p>
+                <span id="chart_ventil_div" style="width: 900px; height: 500px;"></span>
    
-                <%--       <% String EauString = myLinker.getJSonStringVentil(); %>
+                <% String eauString = myLinker.getJSonStringEau(); %>
                 <script>
-                    var ventil=<%=ventilString%>;
+                    var eau=<%=eauString%>;
                 </script>
-                <div id="chart_ventil_div" style="width: 900px; height: 500px;"></div> --%>
+                <div id="chart_eau_div" style="width: 900px; height: 500px;"></div>
         
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
