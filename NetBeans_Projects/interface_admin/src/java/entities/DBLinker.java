@@ -85,19 +85,34 @@ public class DBLinker {
         return tempList; 
     }
     
-    public String getJSonStringChauffage() {
+    public String getJSonStringChauffage() throws SQLException {
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       // PreparedStatement prepare 
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE" ;
+        try {
+            ResultSet res = state.executeQuery(query);    
+            while (!res.isLast()) {
+                res.next();
+//                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
+//                    + "<br/><dd> Gravite : " + res.getString(1) + " <br/><dd>Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+//                tempList.add(currentNotif); 
+           }
+        } catch (SQLException e) {
+//            tempList.add("Aucune notification n'a été trouvée"); 
+        }   
+        
        return "[ ['zeze','ezetzyt'],['0',051] , ['10',20]]";
      }
     
     public String getJSonStringEau() {
-        return "eau";
+        return "static string eau";
     }
     
     public String getJSonStringElec() {
-        return "elec";
+        return "[ ['try1','blabla'],['8',70] , ['80',120]]";
     }
     
     public String getJSonStringVentil() {
-        return "ventil";
+        return "[ ['ventil','test'],['25',14] , ['800',20]]";
     }
 }

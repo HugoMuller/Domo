@@ -33,20 +33,34 @@
         <header>
             <jsp:include page="app/views/partials/header.jsp"/>
         </header>
-
-        <section>
-            <article>
                 <% DBLinker myLinker = new DBLinker();
                 String chaufString = myLinker.getJSonStringChauffage(); %>
                 <script>
                     var chauff=<%=chaufString%>;
                 </script>
-                <div id="chart_div" style="width: 900px; height: 500px;"></div>
-            </article>
-            <aside>
-                <!-- Placez ici des informations complémentaires -->
-            </aside>
-        </section>
+                <span id="chart_chauf_div" align ="center" style="width: 900px; height: 500px;"></span>
+
+   
+                <% String elecString = myLinker.getJSonStringElec(); %>
+                <script>
+                    var elec=<%=elecString%>;
+                </script>
+                <span id="chart_elec_div" align="center" style="width: 900px; height: 500px;"></span>
+                
+   
+                <% String ventilString = myLinker.getJSonStringVentil(); %>
+                <script>
+                    var ventil=<%=ventilString%>;
+                </script>
+                <span id="chart_ventil_div" align="center" style="width: 900px; height: 500px;"></span>
+
+                <p></p>
+   
+                <%--       <% String EauString = myLinker.getJSonStringVentil(); %>
+                <script>
+                    var ventil=<%=ventilString%>;
+                </script>
+                <div id="chart_ventil_div" style="width: 900px; height: 500px;"></div> --%>
         
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
