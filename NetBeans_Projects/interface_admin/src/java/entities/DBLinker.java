@@ -133,7 +133,7 @@ public class DBLinker {
    }
     
     public String getJSonStringYesterdayChauffage() throws SQLException {
-        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String results = "["; 
         Date today = new Date();
         SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
@@ -190,10 +190,6 @@ public class DBLinker {
        return results +"%" +temp[0];
      }     
     
-    public String getJSonStringEau() throws SQLException {
-        return "[ ['Not supported yet','Static'],['8',0] , ['50',0]]";
-    }
-    
     public String getJSonStringElec() throws SQLException {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String results = "[['Heure','Val']"; 
@@ -209,14 +205,19 @@ public class DBLinker {
           }
            results += "]";
         } catch (SQLException e) {
-           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
+           return "[ ['Exception levée','Aucun result Elec'],['0',0] , ['24.00',0]]";
         }   
         return results;
     }
     
     public String getJSonStringVentil() {
-        return "[ ['Not supported yet','Static'],['25',14] , ['800',20]]";
+        return "[ ['Not supported yet','Static'],['0:00',0] , ['6:00',100] , ['12:00',150] , ['14:00',0] ,['18:00',150], ['21:00',0]]";
     }
+    
+    public String getJSonStringEau() throws SQLException {
+        return "[ ['Not supported yet','Static'],['0',0] , ['6:00',0] , ['12:00',0] , ['13:00',20] , ['14:00',0] , ['18:00',15]]";
+    }
+    
     
     public float getFloatFromTimeString(String time) {
         String[] temp = time.split(":");
