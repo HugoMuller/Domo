@@ -87,8 +87,8 @@ google.load("visualization", "1", {packages:["corechart"]});
           drawChauff();
           drawChauffYear();
           drawElec();
-    //     drawVentil();
-    //      drawEau();
+          drawVentil();
+          drawEau();
       }
 
 

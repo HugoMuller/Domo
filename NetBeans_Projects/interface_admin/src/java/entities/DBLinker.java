@@ -85,29 +85,79 @@ public class DBLinker {
         return tempList; 
     }
     
+    
     public String getJSonStringChauffage() throws SQLException {
-        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String results = "[['Heure','Val']"; 
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+        String results = "[['Heure','Today']"; 
         Date today = new Date();
         SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
         String jour = formatjour.format(today);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.DATE, -1);
-//        Date yesterday = calendar.getTime();
-//        String previousJour = formatjour.format(yesterday);
-//        
+      
         String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
-       // String previousQuery = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + previousJour +"' ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);
-            while (!res.isLast()){
-                res.next();
-                results += ",['" + res.getString(2).substring(0,5) + "', " + res.getString(1) + "]";
-          }
-           results += "]";
-        } catch (SQLException e) {
-           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
-        }   
+            while (!res.isLast()) {
+                    res.next();
+                    results += ",['" + res.getString(2).substring(0,5) + "', " + res.getString(1)+ "]";
+             }
+             results += "]";
+         } catch (SQLException e) {
+           return e.getMessage();
+        }
+        return results;
+   }
+        
+    public String getJSonStringTodayChauffage() throws SQLException {
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+        String results = "["; 
+        Date today = new Date();
+        SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
+        String jour = formatjour.format(today);
+        
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
+         try {
+            ResultSet res = state.executeQuery(query);
+            while (!res.isLast()) {
+                    res.next();
+                    if (!res.isFirst()) {
+                         results += ",[" + this.getFloatFromTimeString(res.getString(2).substring(0,5)) + ", " + res.getString(1)+ "]";
+                    } else {
+                        results += "[" + this.getFloatFromTimeString(res.getString(2).substring(0,5)) + ", " + res.getString(1)+ "]";
+                    }      
+             }
+             results += "]";
+         } catch (SQLException e) {
+           return e.getMessage();
+        }
+        return results;
+   }
+    
+    public String getJSonStringYesterdayChauffage() throws SQLException {
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+        String results = "["; 
+        Date today = new Date();
+        SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
+        String jour = formatjour.format(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
+        Date yesterday = calendar.getTime();
+        String previousJour = formatjour.format(yesterday);
+      
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + previousJour +"' ORDER BY HEURE ASC" ;
+        try {
+            ResultSet res = state.executeQuery(query);
+            while (!res.isLast()) {
+                    res.next();
+                    if (!res.isFirst()) {
+                         results += ",[" + this.getFloatFromTimeString(res.getString(2).substring(0,5)) + ", " + res.getString(1)+ "]";
+                    } else {
+                        results += "[" + this.getFloatFromTimeString(res.getString(2).substring(0,5)) + ", " + res.getString(1)+ "]";
+                    }      
+             }
+             results+= "]";
+         } catch (SQLException e) {
+           return e.getMessage();
+        }
         return results;
    }
      
@@ -166,5 +216,10 @@ public class DBLinker {
     
     public String getJSonStringVentil() {
         return "[ ['Not supported yet','Static'],['25',14] , ['800',20]]";
+    }
+    
+    public float getFloatFromTimeString(String time) {
+        String[] temp = time.split(":");
+        return Float.parseFloat(temp[0]) + Float.parseFloat(temp[1])/60 ; 
     }
 }
