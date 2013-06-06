@@ -23,6 +23,7 @@
             <div class="nav-collapse">
                 <ul class="nav nav-pills">
                     <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/")) { %> class="active" <% } %>><a href="/interface_admin/"><i class="icon-home"></i> Accueil</a></li>
+                    <li><a href="system"><i class="icon-wrench"></i> Système</a></li>
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-play-circle"></i>  Mode <b class="caret"></b></a>
                         <ul class="dropdown-menu">
