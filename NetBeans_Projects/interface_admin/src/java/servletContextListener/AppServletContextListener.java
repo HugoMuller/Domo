@@ -23,7 +23,7 @@ public class AppServletContextListener implements ServletContextListener
     public static String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
     public static String protocol = "jdbc:derby://localhost:1527/"; //"jdbc:derby:";
     public static String DBname = "EcologU_DB";
-    private ArrayList<String> tables = new ArrayList<String>()
+    /*private ArrayList<String> tables = new ArrayList<String>()
             {
                 {
                     add("chauffage");
@@ -31,7 +31,7 @@ public class AppServletContextListener implements ServletContextListener
                     add("eau");
                     add("ventillation");
                 }
-            };
+            };*/
     
     @Override
     public void contextInitialized(ServletContextEvent arg0)
@@ -46,7 +46,7 @@ public class AppServletContextListener implements ServletContextListener
         System.out.println("ServletContextListener destroyed");
     }
     
-    private void setUpDB()
+    /*private void setUpDB()
     {
         loadDriver();
         Connection con = null;
@@ -178,7 +178,7 @@ public class AppServletContextListener implements ServletContextListener
                 }
             }
         }
-    }
+    }*/
     
     public static void loadDriver()
     {
