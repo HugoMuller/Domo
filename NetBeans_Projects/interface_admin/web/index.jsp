@@ -30,6 +30,8 @@
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/LoadMultipleLineChart.js"></script> 
         
+        <% DBLinker myLinker = new DBLinker();%>
+        
         <title>Interface Administrateur</title>
     </head>
 
@@ -37,16 +39,25 @@
         <header>
             <jsp:include page="app/views/partials/header.jsp"/>
         </header>
-          <table border="0" > 
+        
+        <table border="0" style="margin-top : 1%" > 
             <tbody>
                 <tr>
                     <td>
-                    <%  DBLinker myLinker = new DBLinker();%>
-                    <% String chaufString = myLinker.getJSonStringChauffage(); %>
+                        
+                 <% String chaufString = myLinker.getJSonStringChauffage(); %>
                     <script>
                         var chauff=<%=chaufString%>;
                     </script>
                       <span id="chart_chauf_div"></span>
+
+           <% String todayString = myLinker.getJSonStringTodayChauffage(); 
+              String yesterdayString = myLinker.getJSonStringYesterdayChauffage(); %>
+           <script>
+              var today=<%=todayString%>;
+              var yesterday=<%=yesterdayString%>;
+           </script>
+            <span id="container" style="width :50%"></span>  
                     </td>
                     
                     <td>
@@ -62,37 +73,52 @@
                     </td>
                 </tr>
             </tbody>
-        </table>   
-       
+        </table>        
+        
+        
         <% String elecString = myLinker.getJSonStringElec(); %>
         <script>
             var elec=<%=elecString%>;
         </script>
-          <span id="chart_elec_div"></span>
-        
-
-
-          <% String ventilString = myLinker.getJSonStringVentil(); %>
-                <script>
-                    var ventil=<%=ventilString%>;
-                </script>
-                <span id="chart_ventil_div" style="width: 900px; height: 500px;"></span>
-   
-                <% String eauString = myLinker.getJSonStringEau(); %>
-                <script>
-                    var eau=<%=eauString%>;
-                </script>
-                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span>
+          <div id="chart_elec_div" style="margin-left: auto; margin-right:auto"></div>
                 
-           <% String todayString = myLinker.getJSonStringTodayChauffage(); 
+   <%--        <% String todayString = myLinker.getJSonStringTodayChauffage(); 
               String yesterdayString = myLinker.getJSonStringYesterdayChauffage(); %>
            <script>
               var today=<%=todayString%>;
               var yesterday=<%=yesterdayString%>;
            </script>
-            <div id="container" style="width :50%"></div>    
-           
-       <footer>
+            <div id="container" style="width :50%"></div>  
+   --%>
+            
+            
+            
+            <table>
+                <tbody>
+                    <tr> 
+                        <td>
+                            <% String ventilString = myLinker.getJSonStringVentil(); %>
+                            <script>
+                                var ventil=<%=ventilString%>;
+                            </script>
+                            <span id="chart_ventil_div" style="width: 50%; height: 500px;"></span>
+                        </td>
+                        <td>   
+                            <% String eauString = myLinker.getJSonStringEau(); %>
+                            <script>
+                                var eau=<%=eauString%>;
+                            </script>
+                            <span id="chart_eau_div" style="width: 100%; height: 500px;"></span>
+                        </td>
+                    </tr>
+                </tbody>
+           </table>
+                            
+                            
+     
+                        
+                            
+        <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
         </footer>
     </body>

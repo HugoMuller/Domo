@@ -10,14 +10,14 @@ google.load("visualization", "1", {packages:["corechart"]});
             colors:['#AEEE00'],
             //hAxis: {title : "Heure"},
             vAxis: {title : "Température ambiante"},
-            height : 400,
-            width : 800,
+            height : 0,
+            width : 0,
             legend: {position: 'none'}
             //interpolateNulls : true 
         };
 
         var chartChauff = new google.visualization.LineChart(document.getElementById('chart_chauf_div'));
-        chartChauff.draw(dataChauff, optionsChauff);         
+       //chartChauff.draw(dataChauff, optionsChauff);         
      }
      
     function drawChauffYear() {
@@ -62,7 +62,10 @@ google.load("visualization", "1", {packages:["corechart"]});
           title: 'Courbe ventilation',
           pointSize: 3,
           hAxis: {title : "Temps"},
-          vAxis: {title : "Vitesse Ventilateur"}
+          vAxis: {title : "Vitesse Ventilateur (rpm)"},
+          height : 400,
+          width : 800,
+          legend: {position: 'none'}
         };
 
         var chartVentil = new google.visualization.LineChart(document.getElementById('chart_ventil_div'));
@@ -76,7 +79,10 @@ google.load("visualization", "1", {packages:["corechart"]});
           title: 'Consommation Eau',
           pointSize: 3,
           hAxis: {title : "Temps"},
-          vAxis: {title : "Consommation"}
+          vAxis: {title : "Consommation"},
+          height : 400,
+          width : 800,
+          legend: {position: 'none'}
         };
 
         var chartEau = new google.visualization.LineChart(document.getElementById('chart_eau_div'));

@@ -6,21 +6,32 @@
 $(function () {
     $('#container').highcharts({
         title: {
-            text: 'Température, variation journalière'
+            text: 'Variation de la température journalière'
+        },
+        chart: {
+            height : 400,
+            width : 650
         },
         xAxis: {
             title: {
-                text: 'x label'
+                text:'Temps (en h)'
             },
+            lineColor : '#000000',
+            lineWidth : 1,
             min: 6,
             max : 22
         },
         yAxis: {
             title: {
-                text: 'y laber'
+                text:'Température en *C'
             },
             min: 0
         },
+        
+        colors: [
+            '#787746',
+            '#B5E655'
+        ],
 
         series: [{
             name: 'Today',
