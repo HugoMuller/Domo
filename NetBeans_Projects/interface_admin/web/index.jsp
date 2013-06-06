@@ -33,29 +33,41 @@
         <header>
             <jsp:include page="app/views/partials/header.jsp"/>
         </header>
-                <% DBLinker myLinker = new DBLinker();
-                String chaufString = myLinker.getJSonStringChauffage(); %>
-                <script>
-                    var chauff=<%=chaufString%>;
-                </script>
-                <span id="chart_chauf_div" style="width: 900px; height: 500px;"></span>
- 
-
-                <%String chaufYearString = myLinker.getJSonStringYearChauffage();%>
-                <script>
-                    var chauffYear=<%=chaufYearString%>;
-                </script>
-                <span id="chart_chaufYear_div" style="width: 900px; height: 500px;"></span>
-
-   
-                <% String elecString = myLinker.getJSonStringElec(); %>
-                <script>
-                    var elec=<%=elecString%>;
-                </script>
-                <span id="chart_elec_div" style="width: 900px; height: 500px;"></span>
+        <table border="0" > 
+            <tbody align="center">
+                <tr>
+                    <td>
+                    <% DBLinker myLinker = new DBLinker();
+                    String chaufString = myLinker.getJSonStringChauffage(); %>
+                    <script>
+                        var chauff=<%=chaufString%>;
+                    </script>
+                     <span id="chart_chauf_div"></span>
+                    </td>
+                    
+                    <td>
+                    <%String chaufYearStringAndYear = myLinker.getJSonStringYearChauffage();
+                      String[] temp = chaufYearStringAndYear.split("%");
+                      String year = temp[1];
+                      String chaufYearString = temp[0]; %>
+                    <script>
+                        var chauffYear=<%=chaufYearString%>;
+                        var year=<%=year%>
+                    </script>
+                     <span id="chart_chaufYear_div"></span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <% String elecString = myLinker.getJSonStringElec(); %>
+                    <script>
+                        var elec=<%=elecString%>;
+                    </script>
+                    <span id="chart_elec_div"></span>
+                </tr>
                 
    
-                <% String ventilString = myLinker.getJSonStringVentil(); %>
+     <!--           <% String ventilString = myLinker.getJSonStringVentil(); %>
                 <script>
                     var ventil=<%=ventilString%>;
                 </script>
@@ -65,8 +77,9 @@
                 <script>
                     var eau=<%=eauString%>;
                 </script>
-                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span> 
-        
+                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span> -->
+            </tbody>
+        </table>
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
         </footer>

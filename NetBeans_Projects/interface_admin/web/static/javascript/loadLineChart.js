@@ -5,25 +5,33 @@ google.load("visualization", "1", {packages:["corechart"]});
         var dataChauff = google.visualization.arrayToDataTable(chauff);
 
         var optionsChauff = {
-            title: 'Courbe des températures - salle de réunion, Aujourd\'hui',
+            title: 'Courbe des températures - Salle de réunion',
             pointSize: 3,
-            hAxis: {title : "Temps"},
-            vAxis: {title : "Température ambiante"}
+            colors:['#AEEE00'],
+            //hAxis: {title : "Heure"},
+            vAxis: {title : "Température ambiante"},
+            height : 400,
+            width : 800,
+            legend: {position: 'none'}
+            //interpolateNulls : true 
         };
 
         var chartChauff = new google.visualization.LineChart(document.getElementById('chart_chauf_div'));
         chartChauff.draw(dataChauff, optionsChauff);         
      }
      
-        function drawChauffYear() {
+    function drawChauffYear() {
         var dataChauff = google.visualization.arrayToDataTable(chauffYear);
 
         var optionsChauff = {
-            title: 'Courbe des températures - salle de réunion, Bilan annuel',
+            title: 'Courbe des températures - Salle de réunion, Bilan sur l\'année '+year,
+            colors:['#96CA2D'],
             pointSize: 3,
-            hAxis: {title : "Temps"},
-            vAxis: {title : "Température ambiante"}
-        };
+            vAxis: {title : "Température ambiante"},
+            height : 400,
+            width : 800,
+            legend: {position: 'none'}
+          };
 
         var chartChauff = new google.visualization.LineChart(document.getElementById('chart_chaufYear_div'));
         chartChauff.draw(dataChauff, optionsChauff);         
@@ -34,10 +42,13 @@ google.load("visualization", "1", {packages:["corechart"]});
         var dataElec = google.visualization.arrayToDataTable(elec);
 
         var optionsElec = {
-          title: 'Courbe Electricité - Données à récuperer via Linkee',
+          title: 'Courbe Journalière Electricité - Données récupereées via Linkee',
+          colors:['#BD8D46'],
           pointSize: 3,
-          hAxis: {title : "Temps"},
-          vAxis: {title : "Consommation Electrique"}
+          vAxis: {title : "Consommation Electrique"},
+          height : 400,
+          width : 800,
+          legend: {position: 'none'}
         };
 
         var chartElec = new google.visualization.LineChart(document.getElementById('chart_elec_div'));
@@ -76,8 +87,8 @@ google.load("visualization", "1", {packages:["corechart"]});
           drawChauff();
           drawChauffYear();
           drawElec();
-          drawVentil();
-          drawEau();
+    //     drawVentil();
+    //      drawEau();
       }
 
 
