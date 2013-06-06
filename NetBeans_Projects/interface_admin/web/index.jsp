@@ -58,7 +58,7 @@
                 <script>
                     var eau=<%=eauString%>;
                 </script>
-                <div id="chart_eau_div" style="width: 900px; height: 500px;"></div>
+                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span>
         
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>

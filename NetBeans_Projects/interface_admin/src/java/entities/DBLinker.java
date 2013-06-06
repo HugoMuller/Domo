@@ -28,13 +28,13 @@ public class DBLinker {
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
        // PreparedStatement prepare 
-        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
+        String query = "SELECT HEURE,GRAVITE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
         try {
             ResultSet res = state.executeQuery(query); 
             while (!res.isLast()) {
                 res.next();
-                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
-                    + "<br/><dd> Gravite : " + res.getString(1) + "<br/><dd> Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                currentNotif = res.getString(1) + "%" + res.getString(2)
+                    + "%" + res.getString(3) + "%" +  res.getString(4);
                 tempList.add(currentNotif); 
            }
         } catch (SQLException e) {
@@ -54,8 +54,8 @@ public class DBLinker {
             ResultSet res = state.executeQuery(query); 
             while (!res.isLast()) {
                 res.next();
-                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
-                    + "<br/><dd> Gravite : " + res.getString(1) + "<br/><dd> Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                currentNotif = res.getString(1) + "%" + res.getString(2)
+                    + "%" + res.getString(3) + "%" +  res.getString(4);
                 tempList.add(currentNotif); 
            }
         } catch (SQLException e) {
@@ -74,8 +74,8 @@ public class DBLinker {
             ResultSet res = state.executeQuery(query);    
             while (!res.isLast()) {
                 res.next();
-                currentNotif = "--> Le " + res.getString(2) + " : " + res.getString(3)
-                    + "<br/><dd> Gravite : " + res.getString(1) + " <br/><dd>Equipement concerné : " +  res.getString(4) + "<br/></dd>";
+                currentNotif = res.getString(1) + "%" + res.getString(2)
+                    + "%" + res.getString(3) + "%" +  res.getString(4);
                 tempList.add(currentNotif); 
            }
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class DBLinker {
     public String getJSonStringChauffage() throws SQLException {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String results = "[['Heure','température']"; 
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE ORDER BY HEURE ASC" ;
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);    
             while (!res.isLast()) {

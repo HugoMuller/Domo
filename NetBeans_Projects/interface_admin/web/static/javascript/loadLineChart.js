@@ -5,7 +5,7 @@ google.load("visualization", "1", {packages:["corechart"]});
         var dataChauff = google.visualization.arrayToDataTable(chauff);
 
         var optionsChauff = {
-            title: 'Courbe des températures',
+            title: 'Courbe des températures - salle de réunion',
             pointSize: 3,
             hAxis: {title : "Temps"},
             vAxis: {title : "Température ambiante"}
