@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +30,6 @@ public class DBLinker {
         String currentNotif = "";
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-       // PreparedStatement prepare 
         String query = "SELECT HEURE,GRAVITE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
         try {
             ResultSet res = state.executeQuery(query); 
@@ -47,8 +49,7 @@ public class DBLinker {
         List<String> tempList = new ArrayList<>(); 
         String currentNotif = "";
         
-        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-       // PreparedStatement prepare 
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE); 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Eclairage'" ;
         try {
             ResultSet res = state.executeQuery(query); 
@@ -86,22 +87,58 @@ public class DBLinker {
     
     public String getJSonStringChauffage() throws SQLException {
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String results = "[['Heure','Val']"; 
+        Date today = new Date();
+        SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
+        String jour = formatjour.format(today);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DATE, -1);
+//        Date yesterday = calendar.getTime();
+//        String previousJour = formatjour.format(yesterday);
+//        
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
+       // String previousQuery = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + previousJour +"' ORDER BY HEURE ASC" ;
+        try {
+            ResultSet res = state.executeQuery(query);
+            while (!res.isLast()){
+                res.next();
+                results += ",['" + res.getString(2).substring(0,5) + "', " + res.getString(1) + "]";
+          }
+           results += "]";
+        } catch (SQLException e) {
+           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
+        }   
+        return results;
+   }
+     
+    public String getJSonStringYearChauffage() throws SQLException {
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String results = "[['Heure','température']"; 
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 ORDER BY HEURE ASC" ;
+        Date today = new Date();
+        SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
+        String jour = formatjour.format(today);
+        SimpleDateFormat formatyear = new SimpleDateFormat("yyyy");
+        String year = formatyear.format(today);
+        String[] temp = null;
+        
+        String query = "SELECT CONSOMMATION,JOUR FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);    
             while (!res.isLast()) {
                 res.next();
-                results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+                temp = res.getString(2).split("-");
+                if (temp[0].equals(year)) {
+                    results += ", [ '" + res.getString(2) + "', " + res.getString(1) + "]";
+                }
 
            }
            results += "]";
         } catch (SQLException e) {
            return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
         }   
-        
+       
        return results;
-     }
+     }     
     
     public String getJSonStringEau() throws SQLException {
 //       Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);

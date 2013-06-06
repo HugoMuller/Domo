@@ -5,13 +5,27 @@ google.load("visualization", "1", {packages:["corechart"]});
         var dataChauff = google.visualization.arrayToDataTable(chauff);
 
         var optionsChauff = {
-            title: 'Courbe des températures - salle de réunion',
+            title: 'Courbe des températures - salle de réunion, Aujourd\'hui',
             pointSize: 3,
             hAxis: {title : "Temps"},
             vAxis: {title : "Température ambiante"}
         };
 
         var chartChauff = new google.visualization.LineChart(document.getElementById('chart_chauf_div'));
+        chartChauff.draw(dataChauff, optionsChauff);         
+     }
+     
+        function drawChauffYear() {
+        var dataChauff = google.visualization.arrayToDataTable(chauffYear);
+
+        var optionsChauff = {
+            title: 'Courbe des températures - salle de réunion, Bilan annuel',
+            pointSize: 3,
+            hAxis: {title : "Temps"},
+            vAxis: {title : "Température ambiante"}
+        };
+
+        var chartChauff = new google.visualization.LineChart(document.getElementById('chart_chaufYear_div'));
         chartChauff.draw(dataChauff, optionsChauff);         
      }
 
@@ -60,6 +74,7 @@ google.load("visualization", "1", {packages:["corechart"]});
       
       function drawVisualization() {
           drawChauff();
+          drawChauffYear();
           drawElec();
           drawVentil();
           drawEau();

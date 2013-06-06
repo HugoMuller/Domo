@@ -39,6 +39,13 @@
                     var chauff=<%=chaufString%>;
                 </script>
                 <span id="chart_chauf_div" style="width: 900px; height: 500px;"></span>
+ 
+
+                <%String chaufYearString = myLinker.getJSonStringYearChauffage();%>
+                <script>
+                    var chauffYear=<%=chaufYearString%>;
+                </script>
+                <span id="chart_chaufYear_div" style="width: 900px; height: 500px;"></span>
 
    
                 <% String elecString = myLinker.getJSonStringElec(); %>
@@ -58,7 +65,7 @@
                 <script>
                     var eau=<%=eauString%>;
                 </script>
-                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span>
+                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span> 
         
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
