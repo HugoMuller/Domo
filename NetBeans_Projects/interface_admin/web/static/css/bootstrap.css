@@ -6093,3 +6093,8 @@ a.badge:hover {
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
+/*.chart_elec_div,.chart_ventil_div,.chart_chauf_div,.chart_eau_div {
+    display: block;
+    margin : 0 auto;
+}*/

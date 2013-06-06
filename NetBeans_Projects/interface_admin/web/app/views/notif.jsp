@@ -35,20 +35,42 @@
             <jsp:include page="partials/header.jsp"/>
         </header>
         
-        <div style="margin-left:60px; margin-top:40px ">
+        <div style="margin-top:5%" align="center">
             <% String type = (String) request.getAttribute("type"); 
             DBLinker myLinker = new DBLinker();
+            String[] notifArray = null ;
             List<String> listNotif = null;
+            
             if (type.equals("Chauffage")) {
                 listNotif = myLinker.getChauffageNotif();
             } else if (type.equals("Eclairage")) {
                 listNotif = myLinker.getEclairageNotif();
             } else if (type.equals("All")) {
                 listNotif = myLinker.getAllNotif();
-            }
-            for (String notif : listNotif) {%> 
-                <%= notif %><br/>
-        <% } %>
+            }%>
+            <TABLE border="2" width ="70%">
+                <THEAD align="center" style="background-color:#E6E6E6">
+                    <TR>
+                        <TD>Gravité</TD>
+                        <TD>Date et Heure</TD>
+                        <TD>Notification</TD>
+                        <TD>Equipement concerné</TD>
+                    </TR>
+                </THEAD>
+                <TBODY align="center"> 
+            <%for (String notif : listNotif) {%>
+                    <TR>
+                <% notifArray = notif.split("%");%>  
+                        <td><%= notifArray[0]%></td>        
+                        <% if (notifArray.length >1) { %>
+                        <td><%= notifArray[1]%></td>   
+                        <td><%= notifArray[2]%></td>
+                        <td><%= notifArray[3]%></td> 
+                        <% } %>
+                    </TR>
+            <% } %>
+                </TBODY>
+            </TABLE>
         </div>
 
         <footer>

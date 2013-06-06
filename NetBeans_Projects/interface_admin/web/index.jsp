@@ -2,8 +2,10 @@
     Document   : index
     Created on : 15 avr. 2013, 10:02:58
     Author     : Hugo
+    Modified on : 06 juin 2013, 11:09:46 by Yaxi/Elo
 --%>
 
+<%@page import="entities.DBLinker"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,15 +33,39 @@
         <header>
             <jsp:include page="app/views/partials/header.jsp"/>
         </header>
+                <% DBLinker myLinker = new DBLinker();
+                String chaufString = myLinker.getJSonStringChauffage(); %>
+                <script>
+                    var chauff=<%=chaufString%>;
+                </script>
+                <span id="chart_chauf_div" style="width: 900px; height: 500px;"></span>
+ 
 
-        <section>
-            <article>
-                <div id="chart_div" style="width: 900px; height: 500px;"></div>
-            </article>
-            <aside>
-                <!-- Placez ici des informations complémentaires -->
-            </aside>
-        </section>
+                <%String chaufYearString = myLinker.getJSonStringYearChauffage();%>
+                <script>
+                    var chauffYear=<%=chaufYearString%>;
+                </script>
+                <span id="chart_chaufYear_div" style="width: 900px; height: 500px;"></span>
+
+   
+                <% String elecString = myLinker.getJSonStringElec(); %>
+                <script>
+                    var elec=<%=elecString%>;
+                </script>
+                <span id="chart_elec_div" style="width: 900px; height: 500px;"></span>
+                
+   
+                <% String ventilString = myLinker.getJSonStringVentil(); %>
+                <script>
+                    var ventil=<%=ventilString%>;
+                </script>
+                <span id="chart_ventil_div" style="width: 900px; height: 500px;"></span>
+   
+                <% String eauString = myLinker.getJSonStringEau(); %>
+                <script>
+                    var eau=<%=eauString%>;
+                </script>
+                <span id="chart_eau_div" style="width: 900px; height: 500px;"></span> 
         
         <footer>
             <jsp:include page="app/views/partials/footer.jsp"/>
