@@ -102,7 +102,7 @@ public class DBLinker {
              }
              results += "]";
          } catch (SQLException e) {
-           return e.getMessage();
+           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
         }
         return results;
    }
@@ -127,7 +127,7 @@ public class DBLinker {
              }
              results += "]";
          } catch (SQLException e) {
-           return e.getMessage();
+           return "[[8,0] , [50,0]]";
         }
         return results;
    }
@@ -156,7 +156,7 @@ public class DBLinker {
              }
              results+= "]";
          } catch (SQLException e) {
-           return e.getMessage();
+           return "[[8,0] , [50,0]]";
         }
         return results;
    }
@@ -184,7 +184,7 @@ public class DBLinker {
            }
            results += "]";
         } catch (SQLException e) {
-           return "[ ['exception levée','aucun result chauffage'],['8',0] , ['50',0]]";
+           return "exception";
         }   
        
        return results +"%" +temp[0];

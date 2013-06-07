@@ -5,6 +5,7 @@
     Modified on : 06 juin 2013, 11:09:46 by Yaxi/Elo
 --%>
 
+<%@page import="java.sql.SQLException"%>
 <%@page import="entities.DBLinker"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,15 +62,19 @@
                     </td>
                     
                     <td>
-                    <%  String chaufYearStringAndYear = myLinker.getJSonStringYearChauffage();
-                        String[] temp = chaufYearStringAndYear.split("%");
-                        String year = temp[1];
+                    <% String chaufYearStringAndYear = myLinker.getJSonStringYearChauffage();
+                        if (!chaufYearStringAndYear.equals("exception")) {
+                            String[] temp = chaufYearStringAndYear.split("%");
+                         String year = temp[1];
                         String chaufYearString = temp[0]; %>
-                        <script>
-                            var chauffYear=<%=chaufYearString%>;
-                            var year=<%=year%>
-                        </script>
-                         <span id="chart_chaufYear_div"></span>
+                            <script>
+                                var chauffYear=<%=chaufYearString%>;
+                                var year=<%=year%>
+                            </script>
+                             <span id="chart_chaufYear_div"></span>
+                    <% }else{%>
+                    No Data Found 
+                    <%}%>                                 
                     </td>
                 </tr>
             </tbody>
