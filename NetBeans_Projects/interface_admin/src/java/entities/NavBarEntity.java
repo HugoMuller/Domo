@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public abstract class NavBarEntity implements Serializable
 {
-    private static String currentURL = "http://localhost:8080/interface_admin";
+    private static String currentURL = "http://localhost:8080/interface_admin/";
     
     public static String getCurrentURL()
     {
