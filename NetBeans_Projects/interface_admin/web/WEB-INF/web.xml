@@ -16,7 +16,9 @@
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMINS</role-name>
@@ -24,8 +26,9 @@
     </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
-        <realm-name>security</realm-name>
+        <realm-name>securityFile</realm-name>
     </login-config>
+    
     <security-role>
         <description/>
         <role-name>USERS</role-name>
