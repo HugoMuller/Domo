@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import entities.NavBarEntity;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -18,11 +19,11 @@ import javax.servlet.annotation.WebServlet;
  * @author Elo/Yaxi
  */
 @WebServlet(urlPatterns = "/Notif")
-
 public class ServletToReadDB extends HttpServlet {
 
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         NavBarEntity.setCurrentURL(request.getRequestURL().toString());
          request.setAttribute("type", request.getParameter("type"));
          request.getServletContext().getRequestDispatcher("/app/views/notif.jsp").forward(request, response);
      }

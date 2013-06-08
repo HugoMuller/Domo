@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="SystemServlet", urlPatterns = "/system", asyncSupported = true)
 public class SystemServlet extends HttpServlet
 {
-    private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
+    //private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
