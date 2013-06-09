@@ -12,9 +12,11 @@
     </head>
     <body>
 
-    <h1>Login Error</h1>
+    <h1>401 - Erreur d'authentification</h1>
     
-    You have not been authenticated!  Sorry.
+    L'URL que vous avez demandé requiert un login et un mot de passe corrects.
+    
+    <a href="login.jsp">S'authentifier</a>
     
     </body>
 </html>
