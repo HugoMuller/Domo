@@ -72,7 +72,7 @@
                 </ul>
             </div><!-- /.nav-collapse -->
             <ul class="nav pull-right">
-                <li><a href="#">Se connecter</a></li>
+                <li><i class="icon-user"></i> <%=request.getRemoteUser()%><a href="logout"><i class="icon-off"></i> Déconnexion</a></li>
             </ul>
         </div>
     </div><!-- /navbar-inner -->
