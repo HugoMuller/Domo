@@ -29,6 +29,20 @@
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/LoadMultipleLineChart.js"></script> 
         
+        <!--<script type="text/javascript">
+            window.onload = startInterval();
+            
+            function startInterval()
+            {
+                setInterval("startTime();", 1000);
+            }
+            
+            function startTime()
+            {
+                drawVisualization();
+            }
+        </script>-->
+        
         <% DBLinker myLinker = new DBLinker();%>
         
         <title>Interface Administrateur</title>
@@ -78,7 +92,7 @@
             </tbody>
         </table>        
         
-        
+                    
         <% String elecString = myLinker.getJSonStringElec(); %>
         <script>
             var elec=<%=elecString%>;

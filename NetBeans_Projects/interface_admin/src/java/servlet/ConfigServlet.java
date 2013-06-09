@@ -60,7 +60,7 @@ public class ConfigServlet extends HttpServlet
                 handleAlerting(request);
                 LOG.log(Level.CONFIG, "Reconfiguration du mode Alerting");
             }
-            else if("validate-all".equals(action))
+            /*else if("validate-all".equals(action))
             {
                 handleStandard(request);
                 handleHoliday(request);
@@ -68,7 +68,7 @@ public class ConfigServlet extends HttpServlet
                 LOG.log(Level.CONFIG, "Reconfiguration du mode Standard");
                 LOG.log(Level.CONFIG, "Reconfiguration du mode Congés");
                 LOG.log(Level.CONFIG, "Reconfiguration du mode Alerting");
-            }
+            }*/
         }
         response.sendRedirect("config");
     }

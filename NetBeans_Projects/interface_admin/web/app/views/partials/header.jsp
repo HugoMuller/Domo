@@ -68,7 +68,7 @@
                         </ul>
                     </li>
                     <li class="divider-vertical"></li>
-                    <li><a href="mailto:contact@ecologu.com"><i class="icon-envelope"></i> Contact</a></li>
+                    <li><a href="mailto:ecologupi2013@gmail.com"><i class="icon-envelope"></i> Contact</a></li>
                 </ul>
             </div><!-- /.nav-collapse -->
             <ul class="nav pull-right">

@@ -30,7 +30,7 @@ public class DBLinker {
         String currentNotif = "";
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String query = "SELECT HEURE,GRAVITE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
+        String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
         try {
             ResultSet res = state.executeQuery(query); 
             while (!res.isLast()) {
@@ -93,7 +93,7 @@ public class DBLinker {
         SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
         String jour = formatjour.format(today);
       
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=5 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);
             while (!res.isLast()) {
@@ -114,7 +114,7 @@ public class DBLinker {
         SimpleDateFormat formatjour = new SimpleDateFormat("yyyy-MM-dd");
         String jour = formatjour.format(today);
         
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=5 AND JOUR ='" + jour +"' ORDER BY HEURE ASC" ;
          try {
             ResultSet res = state.executeQuery(query);
             while (!res.isLast()) {
@@ -143,7 +143,7 @@ public class DBLinker {
         Date yesterday = calendar.getTime();
         String previousJour = formatjour.format(yesterday);
       
-        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 AND JOUR ='" + previousJour +"' ORDER BY HEURE ASC" ;
+        String query = "SELECT CONSOMMATION, HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=5 AND JOUR ='" + previousJour +"' ORDER BY HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);
             while (!res.isLast()) {
@@ -171,7 +171,7 @@ public class DBLinker {
         String year = formatyear.format(today);
         String[] temp = null;
         
-        String query = "SELECT CONSOMMATION,JOUR FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=1 ORDER BY JOUR ASC" ;
+        String query = "SELECT CONSOMMATION,JOUR,HEURE FROM APP.CHAUFFAGE WHERE NUMCAPTEUR=5 ORDER BY JOUR ASC, HEURE ASC" ;
         try {
             ResultSet res = state.executeQuery(query);    
             while (!res.isLast()) {

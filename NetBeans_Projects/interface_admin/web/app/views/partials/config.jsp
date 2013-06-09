@@ -298,18 +298,14 @@
                 </form>
             </article>
             
-            <article id="config-all">
+            <!--<article id="config-all">
                 <form class="form-horizontal well" action="config" method="POST">
                     <p style="text-align: center;">
                         <input type="hidden" name="action" value="validate-all"/>
-                        <input type="submit" value="TOUT Valider"/>
+                        <input type="submit" value="Tout valider"/>
                     </p>
                 </form>
-            </article>
-            
-            <aside>
-                <!-- Placez ici des informations complémentaires -->
-            </aside>
+            </article>-->
         </section>
         
         <footer>
