@@ -27,25 +27,6 @@
         </header>
         
         <div>
-            <!--<div id='toc' class='nav-left'>
-                <nav>
-                    <ul>
-                        <li><a href='#objet'>Objet</a></li>
-                        <li><a href='#mentions-legales'>Mentions légales</a></li>
-                        <li><a href='#definitions'>Définitions</a></li>
-                        <li><a href='#acces-au-service'>Accès au service</a></li>
-                        <li><a href='#propriete-intellectuelle'>Propriété intellectuelle</a></li>
-                        <li><a href='#donnees-personnelles'>Données personnelles</a></li>
-                        <li><a href='#limites-de-responsabilite'>Limites de responsabilité</a></li>
-                        <li><a href='#liens-hypertextes'>Liens hypertextes</a></li>
-                        <li><a href='#force-majeure'>Force majeure</a></li>
-                        <li><a href='#evolution-du-present-contrat'>Evolution du présent contrat</a></li>
-                        <li><a href='#duree-et-resiliation'>Durée et résiliation</a></li>
-                        <li><a href='#droit-applicable-et-juridiction-competente'>Droit applicable et juridiction compétente</a></li>
-                    </ul>
-                </nav>
-            </div>-->
-
             <a name='objet'></a><h2>Objet</h2>
             <br/>Les présentes Conditions Générales ont pour objet
             de définir les modalités de mise à disposition des services

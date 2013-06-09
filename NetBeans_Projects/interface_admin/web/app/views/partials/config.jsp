@@ -297,15 +297,6 @@
                     </fieldset>
                 </form>
             </article>
-            
-            <!--<article id="config-all">
-                <form class="form-horizontal well" action="config" method="POST">
-                    <p style="text-align: center;">
-                        <input type="hidden" name="action" value="validate-all"/>
-                        <input type="submit" value="Tout valider"/>
-                    </p>
-                </form>
-            </article>-->
         </section>
         
         <footer>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.sql.Connection;
@@ -19,8 +15,8 @@ public class SingletonConnectionDB {
 
     
     private SingletonConnectionDB() throws SQLException {
-        String driver = "org.apache.derby.jdbc.ClientDriver"; //"org.apache.derby.jdbc.EmbeddedDriver";
-        String protocol = "jdbc:derby://localhost:1527/"; //"jdbc:derby:";
+        String driver = "org.apache.derby.jdbc.ClientDriver";
+        String protocol = "jdbc:derby://localhost:1527/";
         String DBname = "EcologU_DB";
         Properties props = new Properties();
         

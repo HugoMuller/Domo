@@ -21,7 +21,8 @@ public class LogoutServlet extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.getSession(true).invalidate();
-        LOG.log(Level.INFO, request.getRemoteUser() + " s'est déconnecté");
+        String msg = request.getRemoteUser() + " s'est déconnecté";
+        LOG.log(Level.INFO, msg);
         request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
 

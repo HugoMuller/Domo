@@ -19,13 +19,11 @@
         <script type="text/javascript" src="/interface_admin/static/javascript/bootstrap.js"></script>
         <link rel="stylesheet" type="text/css" href="/interface_admin/static/css/bootstrap.css"/>
         <link rel="shortcut icon" href="/interface_admin/static/images/logo.png"/>
-        
-        
         <%--  Pour dessiner les graphes  --%>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/loadLineChart.js"></script>
        
-       <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/LoadMultipleLineChart.js"></script> 
         
@@ -130,11 +128,7 @@
                     </tr>
                 </tbody>
            </table>
-                            
-                            
-     
-                        
-                            
+                           
         <footer>
             <jsp:include page="footer.jsp"/>
         </footer>

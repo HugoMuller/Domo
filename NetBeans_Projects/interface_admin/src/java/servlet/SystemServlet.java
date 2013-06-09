@@ -5,10 +5,6 @@ import entities.SystemEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name="SystemServlet", urlPatterns = "/system", asyncSupported = true)
 public class SystemServlet extends HttpServlet
-{
-    //private static final Logger LOG = Logger.getLogger(ModeServlet.class.getName());
-    
+{   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -36,7 +30,6 @@ public class SystemServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String action = request.getParameter("action");
-        //LOG.log(Level.SEVERE, action);
         Socket socket;
         PrintWriter out;
         if(action != null)

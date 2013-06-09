@@ -31,12 +31,7 @@
             <url-pattern>/static/css/*</url-pattern>
             <url-pattern>/static/javascript/*</url-pattern>
         </web-resource-collection>
-        <!-- No Auth Contraint! -->
     </security-constraint>
-    <!--<login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>securityFile</realm-name>
-    </login-config>-->
     
     <security-role>
         <description/>
@@ -54,14 +49,5 @@
             <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginerror.jsp</form-error-page>
         </form-login-config>
-    </login-config> 
-    
-    <!--<servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>servlet.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
-    </servlet-mapping>-->
+    </login-config>
 </web-app>

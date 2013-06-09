@@ -21,17 +21,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         <link rel="shortcut icon" href="/interface_admin/static/images/logo.png"/>
         <title>Interface Administrateur</title>
     </head>
+    
     <body>
-
-        <!--<form method="POST" action="j_security_check">
-            <table>
-            <tr><td>User name:</td><td><input type="text" name="j_username" /></td></tr>
-            <tr><td>Password:</td><td><input type="password" name="j_password" /></td></tr>
-            <tr><td><input type="submit" value="Login" /></td></td></tr>
-            </table>
-        </form>-->
-    
-    
         <div class="container login">
             <form method="POST" action="j_security_check" class="form-signin">
                 <h2 class="form-signin-heading">Authentification</h2>

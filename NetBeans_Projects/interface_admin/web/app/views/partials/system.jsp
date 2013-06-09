@@ -54,6 +54,7 @@
                                    onKeyPress="validatePhone();"/>
                             <input type="hidden" name="action" value="send-tmin"/>
                             <input type="submit" value="Changer"/>
+                            Seuil actuel: <%= SystemEntity.getTmin() %>°C
                         </div>
                     </fieldset>
                 </form>
@@ -66,8 +67,8 @@
                                    onKeyPress="validatePhone();"/>
                             <input type="hidden" name="action" value="send-tmax"/>
                             <input type="submit" value="Changer"/>
+                            Seuil actuel: <%= SystemEntity.getTmax() %>°C
                         </div>
-                        
                     </fieldset>
                 </form>
                 Agir sur une source de lumière:
