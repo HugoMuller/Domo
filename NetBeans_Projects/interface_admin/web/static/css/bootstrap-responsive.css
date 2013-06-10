@@ -1088,5 +1088,6 @@
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;
+    max-height: 85px;
   }
 }

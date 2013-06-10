@@ -6073,7 +6073,7 @@ a.badge:hover {
 }
 
 .navbar.navbar-fixed-top > .navbar-inner > .container > .nav.pull-right {
-    display: inline-block;
+    /*display: inline-block;*/
     float: right;
     margin-right: 20px;
     margin-top: 20px;
@@ -6127,6 +6127,9 @@ a.badge:hover {
     padding: 7px 9px;
 }
 
+.navbar-fixed-top,
+.navbar .navbar-fixed-top > .navbar-inner,
+.navbar-fixed-top > .navbar-inner,
 .navbar .navbar-fixed-top {
     max-height: 85px;
 }

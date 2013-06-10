@@ -52,7 +52,6 @@
                                 </a>
                             </li>
                             <li class="divider"></li>
-                            <!--<li class="nav-header">Nav header</li>-->
                             <li><a href="config"><i class="icon-wrench"></i> Configurations</a></li>
                         </ul>
                     </li>
@@ -60,9 +59,9 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-exclamation-sign"></i> Notifications <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="Notif?type=Chauffage">Chauffage</a></li>
-                            <li class="disabled"><a href="Notif?type=Eau">Eau</a></li>
+                            <li class="disabled"><a href="">Eau</a></li>
                             <li><a href="Notif?type=Eclairage">Eclairage</a></li>
-                            <li class="disabled"><a href="Notif?type=Ventilation">Ventilation</a></li>
+                            <li class="disabled"><a href="">Ventilation</a></li>
                             <li class="divider"></li>
                             <li><a href="Notif?type=All"><i class="icon-list-alt"></i> Tout</a></li>
                         </ul>

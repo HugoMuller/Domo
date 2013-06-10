@@ -36,41 +36,40 @@ public class SystemServlet extends HttpServlet
         {
             socket = new Socket("localhost", 8383);
             out = new PrintWriter(socket.getOutputStream());
-            if("off-system".equals(action))
+            switch(action)
             {
-                SystemEntity.setOff(true);
-                out.print(1);
-            }
-            else if("on-system".equals(action))
-            {
-                SystemEntity.setOff(false);
-                out.print(2);
-            }
-            else if("send-tmin".equals(action))
-            {
-                String strTmin = request.getParameterValues("tmin-field")[0];
-                int tmin = Integer.parseInt(strTmin);
-                out.print(3);
-                out.print(tmin);
-            }
-            else if("send-tmax".equals(action))
-            {
-                String strTmax = request.getParameterValues("tmax-field")[0];
-                int tmax = Integer.parseInt(strTmax);
-                out.print(4);
-                out.print(tmax);
-            }
-            else if("send-led".equals(action))
-            {
-                int led = Integer.parseInt(request.getParameterValues("led")[0]);
-                SystemEntity.setLed(led);
-                out.print(5);
-                out.print(led);
-                out.print(SystemEntity.getLed(led)? 1 : 0);
-            }
-            else if("send-push".equals(action))
-            {
-                out.print(6);
+                case "off-system":
+                    SystemEntity.setOff(true);
+                    out.print(1);
+                    break;
+                case "on-system":
+                    SystemEntity.setOff(false);
+                    out.print(2);
+                    break;
+                case "send-tmin":
+                    String strTmin = request.getParameterValues("tmin-field")[0];
+                    int tmin = Integer.parseInt(strTmin);
+                    SystemEntity.setTmin(tmin);
+                    out.print(3);
+                    out.print(tmin);
+                    break;
+                case "send-tmax":
+                    String strTmax = request.getParameterValues("tmax-field")[0];
+                    int tmax = Integer.parseInt(strTmax);
+                    SystemEntity.setTmax(tmax);
+                    out.print(4);
+                    out.print(tmax);
+                    break;
+                case "send-led":
+                    int led = Integer.parseInt(request.getParameterValues("led")[0]);
+                    SystemEntity.setLed(led);
+                    out.print(5);
+                    out.print(led);
+                    out.print(SystemEntity.getLed(led)? 1 : 0);
+                    break;
+                case "send-push":
+                    out.print(6);
+                    break;
             }
             out.flush();
             socket.close();

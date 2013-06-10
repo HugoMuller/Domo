@@ -24,9 +24,9 @@ import static servletContextListener.AppServletContextListener.printSQLException
 @Named
 public class ConfigEntity implements Serializable
 {
-    private Map<String, String> configStandard = new HashMap<String, String>();
-    private Map<String, String> configHoliday  = new HashMap<String, String>();
-    private Map<String, String> configAlerting = new HashMap<String, String>();
+    private Map<String, String> configStandard = new HashMap<>();
+    private Map<String, String> configHoliday  = new HashMap<>();
+    private Map<String, String> configAlerting = new HashMap<>();
     /* Format des HashMap:
      * "heureDebut", "08h00"
      * "heureFin", "18h00"

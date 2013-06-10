@@ -25,26 +25,31 @@
             <jsp:include page="header.jsp"/>
         </header>
         
-        <form class="form-horizontal well" action="control_feedback.php" method="POST" onSubmit="">
-            <fieldset>
-                <legend>Que pensez-vous de notre application?</legend>
-                <h4>Trouvez-vous l'application intuitive?</h4>
-                <br/>
-                <label for="ami" class="radio">
-                    <input type="radio" name="origine" value="ami" id="ami" />oui
-                </label>
-                <label for="web" class="radio">
-                    <input type="radio" name="origine" value="web" id="web" />non
-                </label>
-                <label class="control-label" for="textarea">Votre avis :</label>
-                <div class="controls">
-                    <textarea id="textarea" rows="3"></textarea>
-                    <p class="help-block">Vous pouvez agrandir la fenêtre</p>
-                </div>
-                <button type="submit">Envoyer</button>
-            </fieldset>
-        </form>
+        <h3 style="margin-left:200px;">Que pensez-vous de notre application?</h3>
         
+        <section style="margin-left:200px;margin-right:200px;">
+            <article>
+                <form class="form-horizontal well" action="" method="POST" onSubmit="">
+                    <fieldset>
+                        <legend>Que pensez-vous de notre application?</legend>
+                        <h4>Trouvez-vous l'application intuitive?</h4>
+                        <br/>
+                        <label for="ami" class="radio">
+                            <input type="radio" name="origine" value="ami" id="ami" />oui
+                        </label>
+                        <label for="web" class="radio">
+                            <input type="radio" name="origine" value="web" id="web" />non
+                        </label>
+                        <label class="control-label" for="textarea">Votre avis :</label>
+                        <div class="controls">
+                            <textarea id="textarea" rows="3"></textarea>
+                            <p class="help-block">Vous pouvez agrandir la fenêtre</p>
+                        </div>
+                        <button type="submit">Envoyer</button>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
         <footer>
             <jsp:include page="footer.jsp"/>
         </footer>

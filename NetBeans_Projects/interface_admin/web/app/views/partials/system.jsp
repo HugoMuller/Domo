@@ -74,10 +74,10 @@
                 Agir sur une source de lumière:
                 <form class="form-horizontal well" action="system" method="POST">
                     <fieldset>
-                        <div>LED n°: 
-                            <select name="led" id="led" style="width:64px">
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                        <div>Lumière 
+                            <select name="led" id="led" style="width:160px">
+                                <option value="2">salle de réunion</option>
+                                <!--<option value="3">salle détente</option>-->
                             </select>
                             <input type="hidden" name="action" value="send-led"/>
                             <input type="submit" value="Changer"/>

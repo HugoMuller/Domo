@@ -45,37 +45,28 @@ public class ConfigServlet extends HttpServlet
         String action = request.getParameter("action");
         if(action != null)
         {
-            if("validate-std".equals(action))
+            switch(action)
             {
-                handleStandard(request);
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Standard");
+                case "validate-std":
+                    handleStandard(request);
+                    LOG.log(Level.CONFIG, "Reconfiguration du mode Standard");
+                    break;
+                case "validate-holiday":
+                    handleHoliday(request);
+                    LOG.log(Level.CONFIG, "Reconfiguration du mode Congés");
+                    break;
+                case "validate-alerting":
+                    handleAlerting(request);
+                    LOG.log(Level.CONFIG, "Reconfiguration du mode Alerting");
+                    break;
             }
-            else if("validate-holiday".equals(action))
-            {
-                handleHoliday(request);
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Congés");
-            }
-            else if("validate-alerting".equals(action))
-            {
-                handleAlerting(request);
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Alerting");
-            }
-            /*else if("validate-all".equals(action))
-            {
-                handleStandard(request);
-                handleHoliday(request);
-                handleAlerting(request);
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Standard");
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Congés");
-                LOG.log(Level.CONFIG, "Reconfiguration du mode Alerting");
-            }*/
         }
         response.sendRedirect("config");
     }
     
     private void handleStandard(HttpServletRequest request)
     {
-        Map<String, String> newConfigStandard = new HashMap<String, String>();
+        Map<String, String> newConfigStandard = new HashMap<>();
         String[] heureDebut = request.getParameterValues("std-heure-debut");
         String[] heureFin = request.getParameterValues("std-heure-fin");
         String[] notifications = request.getParameterValues("std-notif");
@@ -95,13 +86,14 @@ public class ConfigServlet extends HttpServlet
         
         for(String notif : notifications)
         {
-            if(notif.equals("sms"))
+            switch(notif)
             {
-                field = request.getParameterValues("std-sms-field")[0];
-            }
-            else if(notif.equals("email"))
-            {
-                field = request.getParameterValues("std-email-field")[0];
+                case "sms":
+                    field = request.getParameterValues("std-sms-field")[0];
+                    break;
+                case "email":
+                    field = request.getParameterValues("std-email-field")[0];
+                    break;
             }
             if(field != null)
             {
@@ -117,7 +109,7 @@ public class ConfigServlet extends HttpServlet
     
     private void handleHoliday(HttpServletRequest request)
     {
-        Map<String, String> newConfigHoliday = new HashMap<String, String>();
+        Map<String, String> newConfigHoliday = new HashMap<>();
         String[] heureDebut = request.getParameterValues("holiday-heure-debut");
         String[] heureFin = request.getParameterValues("holiday-heure-fin");
         String[] notifications = request.getParameterValues("holiday-notif");
@@ -137,13 +129,14 @@ public class ConfigServlet extends HttpServlet
         
         for(String notif : notifications)
         {
-            if(notif.equals("sms"))
+            switch(notif)
             {
-                field = request.getParameterValues("holiday-sms-field")[0];
-            }
-            else if(notif.equals("email"))
-            {
-                field = request.getParameterValues("holiday-email-field")[0];
+                case "sms":
+                    field = request.getParameterValues("holiday-sms-field")[0];
+                    break;
+                case "email":
+                    field = request.getParameterValues("holiday-email-field")[0];
+                    break;
             }
             if(field != null)
             {
@@ -159,7 +152,7 @@ public class ConfigServlet extends HttpServlet
     
     private void handleAlerting(HttpServletRequest request)
     {
-        Map<String, String> newConfigAlerting = new HashMap<String, String>();
+        Map<String, String> newConfigAlerting = new HashMap<>();
         String[] heureDebut = request.getParameterValues("alerting-heure-debut");
         String[] heureFin = request.getParameterValues("alerting-heure-fin");
         String[] notifications = request.getParameterValues("alerting-notif");
@@ -179,13 +172,14 @@ public class ConfigServlet extends HttpServlet
         
         for(String notif : notifications)
         {
-            if(notif.equals("sms"))
+            switch(notif)
             {
-                field = request.getParameterValues("alerting-sms-field")[0];
-            }
-            else if(notif.equals("email"))
-            {
-                field = request.getParameterValues("alerting-email-field")[0];
+                case "sms":
+                    field = request.getParameterValues("alerting-sms-field")[0];
+                    break;
+                case "email":
+                    field = request.getParameterValues("alerting-email-field")[0];
+                    break;
             }
             if(field != null)
             {

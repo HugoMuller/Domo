@@ -23,7 +23,7 @@ public class DBLinker {
     
     public List<String> getChauffageNotif() throws SQLException {
         List<String> tempList = new ArrayList<>(); 
-        String currentNotif = "";
+        String currentNotif;
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Chauffage'" ;
@@ -43,7 +43,7 @@ public class DBLinker {
     
     public List<String> getEclairageNotif() throws SQLException {
         List<String> tempList = new ArrayList<>(); 
-        String currentNotif = "";
+        String currentNotif;
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE); 
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS WHERE TYPE = 'Eclairage'" ;
@@ -63,7 +63,7 @@ public class DBLinker {
         
     public List<String> getAllNotif() throws SQLException {
         List<String> tempList = new ArrayList<>(); 
-        String currentNotif = "";
+        String currentNotif;
         
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String query = "SELECT GRAVITE,HEURE,ACTION,EQUIPEMENT FROM APP.NOTIFICATIONS" ;
