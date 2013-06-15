@@ -31,7 +31,5 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
                 <button class="btn btn-large btn-primary" type="submit">S'authentifier</button>
             </form>
         </div>
-        
-        
     </body>
 </html>
