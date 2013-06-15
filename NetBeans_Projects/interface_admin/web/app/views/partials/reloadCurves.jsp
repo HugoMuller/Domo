@@ -1,53 +1,13 @@
 <%-- 
-    Document   : home
-    Created on : 8 juin 2013, 17:32:09
+    Document   : reloadCurves
+    Created on : 15 juin 2013, 20:16:02
     Author     : Hugo
 --%>
 
-<%@page import="java.sql.SQLException"%>
-<%@page import="entities.DBLinker"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="language" content="fr"/>
-        <meta name="author" content="EcologU"/>
-        <meta name="publisher" content="EcologU"/>
-        <meta name="copyright" content="EcologU"/>
-        <script type="text/javascript" src="/interface_admin/static/javascript/jquery-2.0.0.js"></script>
-        <script type="text/javascript" src="/interface_admin/static/javascript/bootstrap.js"></script>
-        <link rel="stylesheet" type="text/css" href="/interface_admin/static/css/bootstrap.css"/>
-        <link rel="shortcut icon" href="/interface_admin/static/images/logo.png"/>
-        <%--  Pour dessiner les graphes  --%>
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="/interface_admin/static/javascript/loadLineChart.js"></script>
-       
-        <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script src="http://code.highcharts.com/modules/exporting.js"></script>
-        <script type="text/javascript" src="/interface_admin/static/javascript/LoadMultipleLineChart.js"></script> 
-        
-        <script type="text/javascript">
-            /*var url = '/app/views/partials/reloadCurves.jsp';
-            $(document).ready(function() {
-                $.ajaxSetup({ cache: false });
-                setInterval(function() {$("#displayArea").load(url); }, 1000);
-            });*/
-        </script>
-          
-        
-        
-        <title>Interface Administrateur</title>
-    </head>
+<%@page import="entities.DBLinker"%>
 
-    <body>
-        <header>
-            <jsp:include page="header.jsp"/>
-        </header>
-        
-            <div id="displayArea">
-
-        
 <% DBLinker myLinker = new DBLinker();%>
 <table border="0" style="margin-top : 1%" > 
             <tbody>
@@ -126,10 +86,3 @@
                     </tr>
                 </tbody>
            </table>
-    </div>
-                           
-        <footer>
-            <jsp:include page="footer.jsp"/>
-        </footer>
-    </body>
-</html>

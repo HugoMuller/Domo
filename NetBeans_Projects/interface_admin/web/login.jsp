@@ -18,7 +18,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         <script type="text/javascript" src="/interface_admin/static/javascript/jquery-2.0.0.js"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/bootstrap.js"></script>
         <link rel="stylesheet" type="text/css" href="/interface_admin/static/css/bootstrap.css"/>
-        <link rel="shortcut icon" href="/interface_admin/static/images/logo.png"/>
+        <link rel="shortcut icon" href="/interface_admin/static/images/logo.png"/>        
         <title>Interface Administrateur</title>
     </head>
     
