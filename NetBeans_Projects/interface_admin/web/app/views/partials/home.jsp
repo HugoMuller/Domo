@@ -27,16 +27,10 @@
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="/interface_admin/static/javascript/LoadMultipleLineChart.js"></script> 
         
-        <script type="text/javascript">
-            /*var url = '/app/views/partials/reloadCurves.jsp';
-            $(document).ready(function() {
-                $.ajaxSetup({ cache: false });
-                setInterval(function() {$("#displayArea").load(url); }, 1000);
-            });*/
-        </script>
+        
           
         
-        
+        <% DBLinker myLinker = new DBLinker();%>
         <title>Interface Administrateur</title>
     </head>
 
@@ -45,10 +39,6 @@
             <jsp:include page="header.jsp"/>
         </header>
         
-            <div id="displayArea">
-
-        
-<% DBLinker myLinker = new DBLinker();%>
 <table border="0" style="margin-top : 1%" > 
             <tbody>
                 <tr>
@@ -126,7 +116,6 @@
                     </tr>
                 </tbody>
            </table>
-    </div>
                            
         <footer>
             <jsp:include page="footer.jsp"/>

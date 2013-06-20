@@ -16,9 +16,9 @@
             </a>
             <div class="nav-collapse">
                 <ul class="nav nav-pills">
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/cgu")) { %> class="active" <% } %>><a href="cgu"><i class="icon-th-list"></i>Conditions Générales d'Utilisation</a></li>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/cgu")) { %> class="active" <% } %>><a href="cgu"><i class="icon-th-list"></i>Conditions Générales d'Utilisation</a></li>
                     <li class="divider-vertical"></li>
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/feedback")) { %> class="active" <% } %>><a href="feedback"><i class="icon-comment"></i> Feedback</a></li>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/feedback")) { %> class="active" <% } %>><a href="feedback"><i class="icon-comment"></i> Feedback</a></li>
                     <li><a href="http://ecologu.insa-lyon.fr/" target="_target"><i class="icon-info-sign"></i> A propos...</a></li>
                 </ul>
             </div>

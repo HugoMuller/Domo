@@ -48,25 +48,46 @@ public class SystemServlet extends HttpServlet
                     break;
                 case "send-tmin":
                     String strTmin = request.getParameterValues("tmin-field")[0];
-                    int tmin = Integer.parseInt(strTmin);
-                    SystemEntity.setTmin(tmin);
-                    out.print(3);
-                    out.print(tmin);
-                    break;
+                    try
+                    {
+                        int tmin = Integer.parseInt(strTmin);
+                        SystemEntity.setTmin(tmin);
+                        out.print(3);
+                        out.print(tmin);
+                    }
+                    catch(Exception e){}
+                    finally
+                    {
+                        break;
+                    }
                 case "send-tmax":
                     String strTmax = request.getParameterValues("tmax-field")[0];
-                    int tmax = Integer.parseInt(strTmax);
-                    SystemEntity.setTmax(tmax);
-                    out.print(4);
-                    out.print(tmax);
-                    break;
+                    try
+                    {
+                        int tmax = Integer.parseInt(strTmax);
+                        SystemEntity.setTmax(tmax);
+                        out.print(4);
+                        out.print(tmax);
+                    }
+                    catch(Exception e){}
+                    finally
+                    {
+                        break;
+                    }
                 case "send-led":
-                    int led = Integer.parseInt(request.getParameterValues("led")[0]);
-                    SystemEntity.setLed(led);
-                    out.print(5);
-                    out.print(led);
-                    out.print(SystemEntity.getLed(led)? 1 : 0);
-                    break;
+                    try
+                    {
+                        int led = Integer.parseInt(request.getParameterValues("led")[0]);
+                        SystemEntity.setLed(led);
+                        out.print(5);
+                        out.print(led);
+                        out.print(SystemEntity.getLed(led)? 1 : 0);
+                    }
+                    catch(Exception e){}
+                    finally
+                    {
+                        break;
+                    }
                 case "send-push":
                     out.print(6);
                     break;

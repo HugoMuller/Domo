@@ -22,9 +22,9 @@
             </a>
             <div class="nav-collapse">
                 <ul class="nav nav-pills">
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/home")) { %> class="active" <% } %>><a href="/interface_admin/home"><i class="icon-home"></i> Accueil</a></li>
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/system")) { %> class="active" <% } %>><a href="system"><i class="icon-cog"></i> Système</a></li>
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/config")) { %> class="dropdown active" <% }else{ %>class="dropdown" <% } %>>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/home")) { %> class="active" <% } %>><a href="/interface_admin/home"><i class="icon-home"></i> Accueil</a></li>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/system")) { %> class="active" <% } %>><a href="system"><i class="icon-cog"></i> Système</a></li>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/config")) { %> class="dropdown active" <% }else{ %>class="dropdown" <% } %>>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-play-circle"></i>  Mode <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -55,7 +55,7 @@
                             <li><a href="config"><i class="icon-wrench"></i> Configurations</a></li>
                         </ul>
                     </li>
-                    <li <% if(NavBarEntity.getCurrentURL().equals("http://localhost:8080/interface_admin/Notif")) { %> class="dropdown active" <% }else{ %>class="dropdown" <% } %>>
+                    <li <% if(NavBarEntity.getCurrentURL().contains("/interface_admin/Notif")) { %> class="dropdown active" <% }else{ %>class="dropdown" <% } %>>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-exclamation-sign"></i> Notifications <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="Notif?type=Chauffage">Chauffage</a></li>
