@@ -1,10 +1,13 @@
 # Mac OS specific #
 *.DS_Store
 
-# Netbeans specific #
-NetBeans_Projects/interface_admin/nbproject/
-NetBeans_Projects/interface_admin/build/
-NetBeans_Projects/interface_admin/dist/
+# IDE specific #
+.idea/
+interface_admin/build/
+interface_admin/dist/
+interface_admin/nbproject/*
+!interface_admin/nbproject/project.properties
+!interface_admin/nbproject/project.xml
 
 # Class files #
 *.class
@@ -12,3 +15,6 @@ NetBeans_Projects/interface_admin/dist/
 # Package files #
 *.jar
 *.war
+
+# Dump files #
+sh.exe.stackdump
